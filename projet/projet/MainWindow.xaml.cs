@@ -23,6 +23,7 @@ namespace projet
     /// </summary>
     public sealed partial class MainWindow : Window
     {
+        int Test = 0;
         public MainWindow()
         {
             InitializeComponent();
