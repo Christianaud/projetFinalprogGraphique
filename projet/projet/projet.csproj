@@ -12,6 +12,9 @@
     <EnableMsixTooling>true</EnableMsixTooling>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="PagesParJacques\PageAccueil.xaml" />
+  </ItemGroup>
 
   <ItemGroup>
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -41,7 +44,9 @@
     <PackageReference Include="MySql.Data" Version="9.5.0" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Pages\" />
+    <Page Update="Pages\PageAccueil.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <!--
