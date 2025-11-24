@@ -15,6 +15,7 @@ namespace projet.Classes
         string username;
         string password;
         bool doesAdminExist;
+        bool isConnected = false;
 
         // vv Doit changer vv
 
