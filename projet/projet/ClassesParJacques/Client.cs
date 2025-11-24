@@ -11,10 +11,10 @@ namespace projet.ClassesParJacques
         int id;
         string nom;
         string adresse;
-        int num_tel;
+        string num_tel;
         string email;
 
-        public Client(int id, string nom, string adresse, int num_tel, string email)
+        public Client(int id, string nom, string adresse, string num_tel, string email)
         {
             this.id = id;
             this.nom = nom;
@@ -27,7 +27,7 @@ namespace projet.ClassesParJacques
         public string Nom { get => nom; set => nom = value; }
         public string Adresse { get => adresse; set => adresse = value; }
         public string Email { get => email; set => email = value; }
-        public int Num_tel { get => num_tel; set => num_tel = value; }
+        public string Num_tel { get => num_tel; set => num_tel = value; }
 
         public override string ToString()
         {

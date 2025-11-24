@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:projet.PagesParJacques"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local1="using:projet.ClassesParJacques"
     mc:Ignorable="d">
 
     <Grid>
@@ -18,8 +18,7 @@
             <TextBlock FontSize="50" FontWeight="ExtraBlack">Projets</TextBlock>
         </StackPanel>
 
-        <GridView x:Name="listeProjets" Grid.Row="1">
-
+        <GridView x:Name="listeClient" Grid.Row="1">
         </GridView>
     </Grid>
 </Page>

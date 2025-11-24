@@ -18,7 +18,7 @@ namespace projet.ClassesParJacques
         //constructeur de la classe
         public SingletonListe()
         {
-            connectionString = "Server=localhost;Database=a2025_420335-345ri_greq1;Uid=2471354;Pwd=2471354;";
+            connectionString = "Server=cours.cegep3r.info;Database=a2025_420335-345ri_greq1;Uid=2471354;Pwd=2471354;";
             listeClient = new ObservableCollection<Client>();
             listeProjets = new ObservableCollection<Projet>();
         }
@@ -60,7 +60,7 @@ namespace projet.ClassesParJacques
                     int id = r.GetInt32("id");
                     string nom = r.GetString("nom");
                     string adresse = r.GetString("adresse");
-                    int num_tel = r.GetInt32("num_tel");
+                    string num_tel = r.GetString("numTel");
                     string email = r.GetString("email");
                     Client client = new Client(id, nom, adresse, num_tel, email);
                     listeClient.Add(client);
