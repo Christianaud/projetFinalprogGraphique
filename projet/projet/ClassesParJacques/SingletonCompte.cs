@@ -1,5 +1,6 @@
 ﻿using MySql;
 using MySql.Data.MySqlClient;
+using projet.ClassesParJacques;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -67,7 +68,7 @@ namespace projet.Classes
             {
                 using MySqlCommand commande = new MySqlCommand();
                 commande.Connection = con;
-                commande.CommandText = "insert into admin(username, password) values(@username, @password) ";
+                commande.CommandText = "insert into admin(username, password) values(@username, @password)";
                 commande.Parameters.AddWithValue("@username", username);
                 commande.Parameters.AddWithValue("@password", password);
                 con.Open();

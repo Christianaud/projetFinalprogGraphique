@@ -10,12 +10,12 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="70"/>
             <RowDefinition Height="50*"/>
         </Grid.RowDefinitions>
         
         <StackPanel Orientation="Vertical" Grid.Row="0">
-            <TextBlock>Projets</TextBlock>
+            <TextBlock FontSize="50" FontWeight="ExtraBlack">Projets</TextBlock>
         </StackPanel>
 
         <GridView x:Name="listeProjets" Grid.Row="1">
