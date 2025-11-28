@@ -18,7 +18,7 @@ namespace projet.Singletons
 
         private SingletonEmploye()
         {
-            connectionString = "Server=cours.cegep3r.info;Database=a2025_420345ri_gr1_6303034-lanja-rakotomalala;Uid=6303034;Pwd=6303034";
+            connectionString = "Server=cours.cegep3r.info;Database=a2025_420335-345ri_greq1;Uid=6303034;Pwd=6303034";
             listeEmpls = new ObservableCollection<Employe>();
         }
         //retourne l’instance du singleton
@@ -41,7 +41,7 @@ namespace projet.Singletons
             {
                 using MySqlConnection con = new MySqlConnection(connectionString);
                 using MySqlCommand commande = con.CreateCommand();
-                commande.CommandText = "Select * from employes";
+                commande.CommandText = "Select * from employe";
                 con.Open();
                 using MySqlDataReader r = commande.ExecuteReader();
                 while (r.Read())
@@ -75,7 +75,7 @@ namespace projet.Singletons
                 using MySqlConnection con = new MySqlConnection(connectionString);
                 using MySqlCommand commande = new MySqlCommand();
                 commande.Connection = con;
-                commande.CommandText = "insert into employes values(@matricule, @nom, @prenom, @dateNaissance, @email, @adresse, @dateEmbauche, @tauxHoraire, @photo, @statut) ";
+                commande.CommandText = "insert into employe values(@matricule, @nom, @prenom, @dateNaissance, @email, @adresse, @dateEmbauche, @tauxHoraire, @photo, @statut) ";
                 commande.Parameters.AddWithValue("@matricule", matricule);
                 commande.Parameters.AddWithValue("@nom", nom);
                 commande.Parameters.AddWithValue("@prenom", prenom);
@@ -104,7 +104,7 @@ namespace projet.Singletons
                 using MySqlConnection con = new MySqlConnection(connectionString);
                 using MySqlCommand commande = new MySqlCommand();
                 commande.Connection = con;
-                commande.CommandText = "update employes set nom = @nom, prenom = @prenom, email = @email, adresse = @adresse, tauxHoraire = @tauxHoraire, photo = @photo, statut = @statut where matricule = @mtricule";
+                commande.CommandText = "update employe set nom = @nom, prenom = @prenom, email = @email, adresse = @adresse, tauxHoraire = @tauxHoraire, photo = @photo, statut = @statut where matricule = @mtricule";
                 commande.Parameters.AddWithValue("@matricule", matricule);
                 commande.Parameters.AddWithValue("@nom", nom);
                 commande.Parameters.AddWithValue("@prenom", prenom);
@@ -117,26 +117,6 @@ namespace projet.Singletons
                 int i = commande.ExecuteNonQuery();
 
                 getAllEmpls();
-            }
-            catch (MySqlException ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
-        }
-
-        //supprime un Maison en fonction de son id
-        public void supprimerEmploye(string matricule)
-        {
-            try
-            {
-                using MySqlConnection con = new MySqlConnection(connectionString);
-                using MySqlCommand commande = new MySqlCommand();
-                commande.Connection = con;
-                commande.CommandText = "delete from employes where matricule = @matricule";
-                commande.Parameters.AddWithValue("@matricule", matricule);
-                con.Open();
-                int i = commande.ExecuteNonQuery();
-                getAllEmpls(); //permet de recharger la liste des Maisons après un ajout
             }
             catch (MySqlException ex)
             {

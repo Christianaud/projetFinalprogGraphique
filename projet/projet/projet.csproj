@@ -17,6 +17,7 @@
     <None Remove="pages\PageAffichEmp.xaml" />
     <None Remove="pages\PageAjoutCl.xaml" />
     <None Remove="pages\pageAjoutEmp.xaml" />
+    <None Remove="pages\PageEmpDetails.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -45,6 +46,11 @@
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.7175" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.251106002" />
     <PackageReference Include="MySql.Data" Version="9.5.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="pages\PageEmpDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="pages\PageAjoutCl.xaml">

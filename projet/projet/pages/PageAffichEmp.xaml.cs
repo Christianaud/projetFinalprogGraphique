@@ -38,9 +38,8 @@ public sealed partial class PageAffichEmp : Page
         Employe employeSelectionnee = (Employe)grEmp.SelectedItem;
 
         if(employeSelectionnee != null ) {
-            Frame.Navigate(typeof(pageAjoutEmp), employeSelectionnee);
+            Frame.Navigate(typeof(PageEmpDetails), employeSelectionnee);
         }
-
     }
 
     private void appBarAjoutEmp_Click(object sender, RoutedEventArgs e)
