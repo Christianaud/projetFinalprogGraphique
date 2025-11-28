@@ -1,0 +1,59 @@
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls.Primitives;
+using Microsoft.UI.Xaml.Data;
+using Microsoft.UI.Xaml.Input;
+using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Navigation;
+using projet.ClassesParJacques;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
+
+// To learn more about WinUI, the WinUI project structure,
+// and more about our project templates, see: http://aka.ms/winui-project-info.
+
+namespace projet.PagesParJacques;
+
+/// <summary>
+/// An empty page that can be used on its own or navigated to within a Frame.
+/// </summary>
+public sealed partial class PageDetailsProjets : Page
+{
+    Projet projet;
+    public PageDetailsProjets()
+    {
+        InitializeComponent();
+    }
+
+    protected override void OnNavigatedTo(NavigationEventArgs e)
+    {
+        projet = e.Parameter as Projet;
+        if (projet != null)
+        {
+            tbxNumero.Text = "Numero:\n " + projet.Numero;
+            tbxTitre.Text = "Titre:\n " + projet.Titre;
+            tbxStatut.Text = "Statut:\n " + projet.Statut;
+            tbxDescription.Text = "Description:\n " + projet.Description;
+            tbxDateDebut.Text = "Date de debut:\n " + projet.DateDebut.ToString();
+            tbxIdClient.Text = "Id Client:\n " + projet.IdClient.ToString();
+            tbxBudget.Text = "Budget:\n " + projet.Budget.ToString();
+            tbxNomClient.Text = "Nom Client:\n " + projet.NomClient;
+            tbxNbrEmployes.Text = "Employe:\n " + projet.NbrEmployes.ToString();
+        }
+    }
+
+    private void btnModifier_Click(object sender, RoutedEventArgs e)
+    {
+        Projet newP = projet;
+
+        if (newP != null)
+        {
+            Frame.Navigate(typeof(PageModifierProjets), newP);
+        }
+    }
+}

@@ -8,7 +8,7 @@ namespace projet.ClassesParJacques
 {
     internal class Projet
     {
-        int numero;
+        string numero;
         string titre;
         DateTime dateDebut;
         string description;
@@ -16,9 +16,10 @@ namespace projet.ClassesParJacques
         int nbrEmployes;
         int totalSalaire;
         int idClient;
+        string nomClient;
         string statut;
 
-        public Projet(int numero, string titre, DateTime dateDebut, string description, int budget, int nbrEmployes, int totalSalaire, int idClient, string statut)
+        public Projet(string numero, string titre, DateTime dateDebut, string description, int budget, int nbrEmployes, int totalSalaire, int idClient, string nomClient, string statut)
         {
             this.numero = numero;
             this.titre = titre;
@@ -28,10 +29,11 @@ namespace projet.ClassesParJacques
             this.nbrEmployes = nbrEmployes;
             this.totalSalaire = totalSalaire;
             this.idClient = idClient;
+            this.nomClient = nomClient;
             this.statut = statut;
         }
 
-        public int Numero { get => numero; set => numero = value;}
+        public string Numero { get => numero; set => numero = value;}
         public string Titre { get => titre; set => titre = value;}
         public DateTime DateDebut { get => dateDebut; set => dateDebut = value;}
         public string Description { get => description; set => description = value;}
@@ -41,9 +43,11 @@ namespace projet.ClassesParJacques
         public int IdClient { get => idClient; set => idClient = value; }
         public string Statut { get => statut; set => statut = value; }
 
+        public string NomClient { get => nomClient; set => nomClient = value; }
+
         public override string ToString()
         {
-            return $"Numero: {numero}, Titre: {titre}, DateDebut: {dateDebut.ToString()}, Description: {description}, Budget: {budget}, Nbr_employes: {nbrEmployes}, TotalSalaire: {totalSalaire}, IdClient: {idClient}, Statut: {statut}";
+            return $"Numero: {numero}, Titre: {titre}, DateDebut: {dateDebut.ToString()}, Description: {description}, Budget: {budget}, Nbr_employes: {nbrEmployes}, TotalSalaire: {totalSalaire}, IdClient: {idClient}, NomClient: {nomClient}, Statut: {statut}";
         }
     }
 }

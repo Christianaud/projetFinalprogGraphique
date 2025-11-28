@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace projet.ClassesParJacques
 {
@@ -15,6 +16,7 @@ namespace projet.ClassesParJacques
         ObservableCollection<Client> listeClient;
         ObservableCollection<Projet> listeProjets;
         static SingletonListe instance = null;
+
         //constructeur de la classe
         public SingletonListe()
         {
@@ -33,6 +35,8 @@ namespace projet.ClassesParJacques
         //Propriété qui retourne la liste des clients
         public ObservableCollection<Client> ListeClients { get => listeClient; }
         public ObservableCollection<Projet> ListeProjets { get => listeProjets; }
+
+
 
         /*MÉTHODES*/
         //retourne un client à une position précise
@@ -78,23 +82,24 @@ namespace projet.ClassesParJacques
             try
             {
                 using MySqlConnection con = new MySqlConnection(connectionString);
-                using MySqlCommand commande = con.CreateCommand();
-                commande.CommandText = "Select * from programs";
+                using MySqlCommand commande = new MySqlCommand("affiche_projet_client");
+                commande.Connection = con;
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
                 con.Open();
                 using MySqlDataReader r = commande.ExecuteReader();
                 while (r.Read())
                 {
-                    int matricule = r.GetInt32("matricule");
+                    string numero = r.GetString("numero");
                     string titre = r.GetString("titre");
-                    string adresse = r.GetString("adresse");
-                    DateTime dateDebut = r.GetDateTime("date_debut");
+                    DateTime dateDebut = r.GetDateTime("dateDebut");
                     string description = r.GetString("description");
                     int budget = r.GetInt32("budget");
-                    int nbrEmployes = r.GetInt32("nbr_employes");
-                    int totalSalaire = r.GetInt32("total_salaires");
-                    int idClient = r.GetInt32("id_client");
+                    int nbrEmployes = r.GetInt32("nbEmploye");
+                    int totalSalaire = r.GetInt32("totalSalaireAPayer");
+                    int idClient = r.GetInt32("idClient");
                     string statut = r.GetString("statut");
-                    Projet projet = new Projet(matricule, titre, dateDebut, description, budget, nbrEmployes, totalSalaire, idClient, statut);
+                    string nomClient = r.GetString("nom");
+                    Projet projet = new Projet(numero, titre, dateDebut, description, budget, nbrEmployes, totalSalaire, idClient, nomClient, statut);
                     listeProjets.Add(projet);
                 }
             }
@@ -162,7 +167,7 @@ namespace projet.ClassesParJacques
         //modifie un client à une position précise
         public void modifierClient(int position, Client client)
         {
-            listeClient[position] = client;
+            getAllClients();
         }
         //supprime à une position précise
         public void supprimerProjet(int id)
