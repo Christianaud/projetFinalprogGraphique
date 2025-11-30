@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
 using Microsoft.UI.Xaml.Navigation;
 using projet.classes;
+using projet.Singletons;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -35,6 +36,8 @@ public sealed partial class pageAjoutEmp : Page
     private void btnAjout_Click(object sender, RoutedEventArgs e)
     {
         bool flagValide = true;
+
+        tblMatriculeErreur.Text = string.Empty;
         tblNomErreur.Text = string.Empty;
         tblPrenomErreur.Text = string.Empty;
         tblDateNaissanceErreur.Text = string.Empty;
@@ -51,16 +54,13 @@ public sealed partial class pageAjoutEmp : Page
             flagValide = false;
             tblMatriculeErreur.Text = "Le champs matricule ne doit etre vide !!!";
 
-        } else if (tbxMatricule.Text.Length < 11)
-        {
-            tblMatriculeErreur.Text = "Le champs matricule ne doit excéder 10 lettres";
         }
 
         if (string.IsNullOrWhiteSpace(tbxNom.Text))
         {
             flagValide = false;
             tblNomErreur.Text = "Ce champ nom ne doit pas etre vide !!! ";
-        } else if (tbxMatricule.Text.Length < 3)
+        } else if (tbxNom.Text.Length < 3)
         {
             tblNomErreur.Text = "Un nom doit avoir plus de 2 mots !!!";
         }
@@ -74,15 +74,156 @@ public sealed partial class pageAjoutEmp : Page
             tblPrenomErreur.Text = "Un prénom doit avoir plus de 2 mots !!!";
         }
 
-
-
-        if (string.IsNullOrWhiteSpace(tbxNom.Text))
+        // validation date de naissance
+        if (dprNaissance.Date==null)
         {
             flagValide = false;
-            tblNomErreur.Text = "Ce champ nom ne doit pas etre vide !!! ";
+            tblDateNaissanceErreur.Text = "La date de naissance ne doit pas être vide !!!";
+        }
+        else
+        {
+            DateTime date_Naissance = dprNaissance.Date.DateTime;
+
+            if (date_Naissance > DateTime.Now)
+            {
+                flagValide = false;
+                tblDateNaissanceErreur.Text = "La date de naissance ne peut pas etre dans le futur";
+            }
+            else {
+                DateTime dixHuitAns = DateTime.Now.AddYears(-18);
+
+                if (date_Naissance> dixHuitAns)
+                {
+                    flagValide=false;
+                    tblDateNaissanceErreur.Text = "L'employé doit avoir au moins 18 ans !!!";
+                }
+            }
         }
 
+        // validation date d'embauche
+        if (dprEmbauche.Date == null)
+        {
+            flagValide = false;
+            tblDateEmbaucheErreur.Text = "La date d'embauche ne doit pas être vide !!!";
+        }
+        else
+        {
+            DateTime date_Embauche = dprEmbauche.Date.DateTime;
 
+            if (date_Embauche > DateTime.Now)
+            {
+                flagValide = false;
+                tblDateEmbaucheErreur.Text = "La date d'embauche ne peut pas être dans le futur !!!";
+            }
+
+        }
+
+        // validation email
+        if (string.IsNullOrWhiteSpace(tbxEmail.Text))
+        {
+            flagValide = false;
+            tblEmailErreur.Text = "Le champ email ne doit pas être vide !!!";
+        }
+        else if (!tbxEmail.Text.Contains("@") || !tbxEmail.Text.Contains("."))
+        {
+            flagValide = false;
+            tblEmailErreur.Text = "Format email invalide !!!";
+        }
+
+        // validation adresse
+        if (string.IsNullOrWhiteSpace(tbxAdresse.Text))
+        {
+            flagValide = false;
+            tblAdresseErreur.Text = "L'adresse ne doit pas être vide !!!";
+        }
+        else if (tbxAdresse.Text.Length < 5)
+        {
+            flagValide = false;
+            tblAdresseErreur.Text = "L'adresse doit contenir au moins 5 caractères !!!";
+        }
+
+        // validation taux horaire
+        if (string.IsNullOrWhiteSpace(nbxTauxHoraire.Text))
+        {
+            flagValide = false;
+            tblTauxHoraireErreur.Text = "Le taux horaire ne doit pas être vide !!!";
+        }
+        else
+        {
+            double taux;
+            bool valide = double.TryParse(nbxTauxHoraire.Text, out taux);
+
+            if (!valide)
+            {
+                flagValide = false;
+                tblTauxHoraireErreur.Text = "Le taux horaire doit être un nombre !!!";
+            }
+            else if (taux < 15)
+            {
+                flagValide = false;
+                tblTauxHoraireErreur.Text = "Le taux horaire doit être supérieur à 15$ !!!";
+            }
+        }
+
+        // validation photo
+        if (string.IsNullOrWhiteSpace(tbxPhoto.Text))
+        {
+            flagValide = false;
+            tblPhotoErreur.Text = "Veuillez sélectionner une photo !!!";
+        }
+
+        // validation statut
+        if (cmbxStatut.SelectedIndex == -1)
+        {
+            flagValide = false;
+            tblStatutErreur.Text = "Veuillez sélectionner un statut !!!";
+        }
+
+        // on arrete si une erreur existe
+        if (flagValide == false) return;
+
+        string matricule = tbxMatricule.Text;
+        string nom = tbxNom.Text;
+        string prenom = tbxPrenom.Text;
+        string dateNaissance = dprNaissance.Date.DateTime.ToString();
+        string dateEmbauche = dprEmbauche.Date.DateTime.ToString();
+        string email = tbxEmail.Text;
+        string adresse = tbxAdresse.Text;
+        string tauxHoraire = nbxTauxHoraire.Text;
+        string photo = tbxPhoto.Text;
+        string statut = cmbxStatut.SelectedItem.ToString();
+
+        if(modeEdition == true) {
+           employeAModifier.Matricule = matricule;
+            employeAModifier.Nom = nom;
+            employeAModifier.Prenom = prenom;
+            employeAModifier.DateNaissance = dprNaissance.Date.DateTime;
+            employeAModifier.DateEmbauche = dprEmbauche.Date.DateTime;
+            employeAModifier.Email = email;
+            employeAModifier.Adresse = adresse;
+            employeAModifier.TauxHoraire = double.Parse(nbxTauxHoraire.Text);
+            employeAModifier.Photo = photo;
+            employeAModifier.Statut = statut;
+            SingletonEmploye.getInstance().modifierEmploye(matricule, nom, prenom, email, adresse, double.Parse(nbxTauxHoraire.Text), photo, statut);
+
+            employeAModifier = null;
+            modeEdition = false;
+            btnAjout.Content = "Ajouter";
+        }else
+        {
+            Employe nouveauE = new Employe(matricule, nom, prenom, dprNaissance.Date.DateTime, email, adresse,dprEmbauche.Date.DateTime, double.Parse(nbxTauxHoraire.Text), photo, statut);
+            SingletonEmploye.getInstance().ajouterEmploye(matricule, nom, prenom, dprNaissance.Date.DateTime, email, adresse, dprEmbauche.Date.DateTime, double.Parse(nbxTauxHoraire.Text), photo, statut);
+        }
+
+        tbxMatricule.Text = "";
+        tbxNom.Text = "";
+        tbxEmail.Text = "";
+        tbxAdresse.Text = "";
+        nbxTauxHoraire.Text = "";
+        tbxPhoto.Text = "";
+        cmbxStatut.SelectedIndex = -1;
+
+        Frame.Navigate(typeof(PageAffichEmp));
 
     }
 
@@ -91,13 +232,14 @@ public sealed partial class pageAjoutEmp : Page
         employeAModifier = e.Parameter as Employe;
         if (employeAModifier != null)
         {
+            tbxMatricule.Text = employeAModifier.Matricule;
             tbxNom.Text = employeAModifier.Nom;
             tbxPrenom.Text = employeAModifier.Prenom;
-            dprNaissance.SelectedDate = employeAModifier.DateNaissance;
+            dprNaissance.SelectedDate = new DateTimeOffset(employeAModifier.DateNaissance);
             tbxEmail.Text = employeAModifier.Email;
             tbxAdresse.Text = employeAModifier.Adresse;
-            dprEmbauche.SelectedDate = employeAModifier.DateEmbauche;
-            nbxTauxHoraire.Text = employeAModifier.TauxHoraire;
+            dprEmbauche.SelectedDate = new DateTimeOffset( employeAModifier.DateEmbauche);
+            nbxTauxHoraire.Text = employeAModifier.TauxHoraire.ToString();
             tbxPhoto.Text = employeAModifier.Photo;
             cmbxStatut.Text = employeAModifier.Statut;
 

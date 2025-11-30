@@ -104,7 +104,7 @@ namespace projet.Singletons
                 using MySqlConnection con = new MySqlConnection(connectionString);
                 using MySqlCommand commande = new MySqlCommand();
                 commande.Connection = con;
-                commande.CommandText = "update employe set nom = @nom, prenom = @prenom, email = @email, adresse = @adresse, tauxHoraire = @tauxHoraire, photo = @photo, statut = @statut where matricule = @mtricule";
+                commande.CommandText = "update employe set nom = @nom, prenom = @prenom, email = @email, adresse = @adresse, tauxHoraire = @tauxHoraire, photo = @photo, statut = @statut where matricule = @matricule";
                 commande.Parameters.AddWithValue("@matricule", matricule);
                 commande.Parameters.AddWithValue("@nom", nom);
                 commande.Parameters.AddWithValue("@prenom", prenom);
@@ -114,7 +114,7 @@ namespace projet.Singletons
                 commande.Parameters.AddWithValue("@photo", photo);
                 commande.Parameters.AddWithValue("@statut", statut);
                 con.Open();
-                int i = commande.ExecuteNonQuery();
+                commande.ExecuteNonQuery();
 
                 getAllEmpls();
             }
