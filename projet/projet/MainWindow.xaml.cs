@@ -27,7 +27,7 @@ namespace projet
         public MainWindow()
         {
             InitializeComponent();
-            mainframe.Navigate(typeof(PageListeProjets));
+            mainframe.Navigate(typeof(PageListeClients));
         }
     }
 }

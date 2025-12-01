@@ -109,7 +109,7 @@ namespace projet.ClassesParJacques
             }
         }
         //ajoute un client dans la liste
-        public void ajouterClient(int id, string nom, string adresse, int num_tel, string email)
+        public void ajouterClient(string nom, string adresse, string num_tel, string email)
         {
             try
             {
@@ -135,7 +135,31 @@ namespace projet.ClassesParJacques
             }
         }
 
-        public void ajouterProjer(int numero, string titre, DateTime dateDebut, string description, int budget, int nbrEmployes, int totalSalaire, int idClient, string statut)
+        public void modifierClient(int client_id, string nom, string adresse, string num_tel, string email)
+        {
+            try
+            {
+                using MySqlConnection con = new MySqlConnection(connectionString);
+                using MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "update client set nom = @nom, email = @email, adresse = @adresse, numTel = @num_tel where id = @client_id";
+                commande.Parameters.AddWithValue("@client_id", client_id);
+                commande.Parameters.AddWithValue("@nom", nom);
+                commande.Parameters.AddWithValue("@adresse", adresse);
+                commande.Parameters.AddWithValue("@num_Tel", num_tel);
+                commande.Parameters.AddWithValue("@email", email);
+                con.Open();
+                commande.ExecuteNonQuery();
+
+                getAllClients();
+            }
+            catch (MySqlException ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
+        public void ajouterProjer(string titre, DateTime dateDebut, string description, int budget, int nbrEmployes, int totalSalaire, int idClient, string statut)
         {
             try
             {
@@ -163,11 +187,6 @@ namespace projet.ClassesParJacques
             {
                 Debug.WriteLine(ex.Message);
             }
-        }
-        //modifie un client à une position précise
-        public void modifierClient(int position, Client client)
-        {
-            getAllClients();
         }
         //supprime à une position précise
         public void supprimerProjet(int id)

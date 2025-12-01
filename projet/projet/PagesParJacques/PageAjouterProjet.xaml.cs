@@ -22,23 +22,16 @@ namespace projet.PagesParJacques
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class PageListeClients : Page
+    public sealed partial class PageAjouterProjet : Page
     {
-        public PageListeClients()
+        public PageAjouterProjet()
         {
             InitializeComponent();
-            listeClient.ItemsSource = SingletonListe.getInstance().ListeClients;
-            SingletonListe.getInstance().getAllClients();
         }
-
-        private void listeClient_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void btnAjouter_Click(object sender, RoutedEventArgs e)
         {
-            Client newC = (Client)listeClient.SelectedItem;
-
-            if (newC != null)
-            {
-                Frame.Navigate(typeof(PageDetailsClients), newC);
-            }
+            SingletonListe.getInstance().ajouterProjer(tbxTitre.Text, DateTime.Parse(tbxDateDebut.Text), tbxDescription.Text, int.Parse(tbxBudget.Text), int.Parse(tbxNbrEmployes.Text), int.Parse(tbxTotalSalaire.Text), int.Parse(tbxIdClient.Text), tbxStatut.Text);
+            ;
         }
     }
 }

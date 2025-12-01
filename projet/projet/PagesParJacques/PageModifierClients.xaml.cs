@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using projet.Classes;
 using projet.ClassesParJacques;
 using System;
 using System.Collections.Generic;
@@ -35,12 +36,15 @@ public sealed partial class PageModifierClients : Page
         client = e.Parameter as Client;
         if (client != null)
         {
-            tbxNom.Text = "Nom:\n " + client.Nom;
-            tbxId.Text = "Id:\n " + client.Id;
-            tbxAdresse.Text = "Adresse:\n " + client.Adresse;
-            tbxNumTel.Text = "Telephone:\n " + client.Num_tel;
-            tbxEmail.Text = "Email:\n " + client.Email.ToString();
-
+            tbxNom.Text = "Nom: " + client.Nom;
+            tbxAdresse.Text = "Adresse: " + client.Adresse;
+            tbxNumTel.Text = "Telephone: " + client.Num_tel;
+            tbxEmail.Text = "Email: " + client.Email.ToString();
         }
+    }
+
+    private void btnModifier_Click(object sender, RoutedEventArgs e)
+    {
+        SingletonListe.getInstance().modifierClient(client.Id, tbxNom.Text, tbxAdresse.Text, tbxNumTel.Text, tbxEmail.Text);
     }
 }

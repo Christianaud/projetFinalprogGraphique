@@ -35,14 +35,19 @@ public sealed partial class PageModifierProjets : Page
         projet = e.Parameter as Projet;
         if (projet != null)
         {
-            tbxTitre.Text = "Titre:\n " + projet.Titre;
-            tbxStatut.Text = "Statut:\n " + projet.Statut;
-            tbxDescription.Text = "Description:\n " + projet.Description;
-            tbxDateDebut.Text = "Date de debut:\n " + projet.DateDebut.ToString();
-            tbxIdClient.Text = "Id Client:\n " + projet.IdClient.ToString();
-            tbxBudget.Text = "Budget:\n " + projet.Budget.ToString();
-            tbxNomClient.Text = "Nom Client:\n " + projet.NomClient;
-            tbxNbrEmployes.Text = "Employe:\n " + projet.NbrEmployes.ToString();
+            tbxTitre.Text = "Titre: " + projet.Titre;
+            tbxStatut.Text = "Statut: " + projet.Statut;
+            tbxDescription.Text = "Description: " + projet.Description;
+            tbxDateDebut.Text = "Date de debut: " + projet.DateDebut.ToString();
+            tbxIdClient.Text = "Id Client: " + projet.IdClient.ToString();
+            tbxBudget.Text = "Budget: " + projet.Budget.ToString();
+            tbxNomClient.Text = "Nom Client: " + projet.NomClient;
+            tbxNbrEmployes.Text = "Employe: " + projet.NbrEmployes.ToString();
+            tbxTotalSalaire.Text = "Total Salaires: " + projet.TotalSalaire.ToString();
         }
+    }
+    private void btnModifier_Click(object sender, RoutedEventArgs e)
+    {
+
     }
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Page
-    x:Class="projet.PagesParJacques.PageModifierClients"
+    x:Class="projet.PagesParJacques.PageAjouterClient"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:projet.PagesParJacques"
@@ -10,12 +10,12 @@
 
     <ScrollViewer>
         <StackPanel x:Name="display" Orientation="Vertical" Spacing="20" Padding="20">
-            <TextBlock FontSize="40" FontWeight="ExtraBlack">Modification du Client:</TextBlock>
+            <TextBlock FontSize="40" FontWeight="ExtraBlack">Addition d'un Client:</TextBlock>
             <TextBox x:Name="tbxNom"/>
             <TextBox x:Name="tbxAdresse"/>
             <TextBox x:Name="tbxNumTel"/>
             <TextBox x:Name="tbxEmail"/>
-            <Button x:Name="btnModifier" Content="Modifier" Click="btnModifier_Click"/>
+            <Button x:Name="btnAjouter" Content="Ajouter" Click="btnAjouter_Click"/>
         </StackPanel>
     </ScrollViewer>
 </Page>
