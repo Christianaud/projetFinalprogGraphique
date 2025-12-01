@@ -167,6 +167,7 @@ namespace projet.ClassesParJacques
         //modifie un client à une position précise
         public void modifierClient(int position, Client client)
         {
+
             getAllClients();
         }
         //supprime à une position précise

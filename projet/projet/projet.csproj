@@ -18,6 +18,8 @@
     <None Remove="PagesParJacques\PageDetailsProjets.xaml" />
     <None Remove="PagesParJacques\PageListeClients.xaml" />
     <None Remove="PagesParJacques\PageListeProjets.xaml" />
+    <None Remove="PagesParJacques\PageModifierClients.xaml" />
+    <None Remove="PagesParJacques\PageModifierProjets.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,6 +48,16 @@
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.7175" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.251106002" />
     <PackageReference Include="MySql.Data" Version="9.5.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="PagesParJacques\PageModifierClients.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="PagesParJacques\PageModifierProjets.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="PagesParJacques\PageDetailsClients.xaml">
