@@ -15,18 +15,19 @@
             <RowDefinition Height="50*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Vertical" Grid.Row="0">
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Spacing="50">
             <TextBlock FontSize="50" FontWeight="ExtraBlack">Projets</TextBlock>
+            <Button x:Name="btnCsvExport" Content="Exporter tout en CSV" Click="btnCsvExport_Click"/>
         </StackPanel>
 
         <GridView x:Name="listeProjets" Grid.Row="1" SelectionChanged="listeProjets_SelectionChanged">
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="local1:Projet">
-                    <StackPanel Orientation="Vertical" Width="200" Spacing="10" Background="Firebrick" Margin="5" Padding="5">
-                        <TextBlock Text="{x:Bind Numero}" FontWeight="ExtraBlack" FontSize="30" Foreground="LightCoral"/>
-                        <TextBlock Text="{x:Bind Titre}" FontWeight="ExtraBlack" FontSize="30" Foreground="LightCoral"/>
-                        <TextBlock Text="{x:Bind NomClient}" FontSize="25" Foreground="LightCoral"/>
-                        <TextBlock Text="{x:Bind Budget}" FontWeight="ExtraBlack" FontSize="30" Foreground="LightCoral"/>
+                    <StackPanel Orientation="Vertical" Width="200" Spacing="10" Background="LightGray" Margin="5" Padding="5">
+                        <TextBlock Text="{x:Bind Numero}" FontWeight="ExtraBlack" FontSize="7"/>
+                        <TextBlock Text="{x:Bind Titre}" FontWeight="ExtraBlack" FontSize="30"/>
+                        <TextBlock Text="{x:Bind NomClient}" FontSize="25"/>
+                        <TextBlock Text="{x:Bind Budget}" FontWeight="ExtraBlack" FontSize="30"/>
                     </StackPanel>
                 </DataTemplate>
             </GridView.ItemTemplate>

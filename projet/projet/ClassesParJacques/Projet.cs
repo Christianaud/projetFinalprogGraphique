@@ -47,7 +47,7 @@ namespace projet.ClassesParJacques
 
         public override string ToString()
         {
-            return $"Numero: {numero}, Titre: {titre}, DateDebut: {dateDebut.ToString()}, Description: {description}, Budget: {budget}, Nbr_employes: {nbrEmployes}, TotalSalaire: {totalSalaire}, IdClient: {idClient}, NomClient: {nomClient}, Statut: {statut}";
+            return $"{numero};{titre};{dateDebut.ToString()};{description};{budget};{nbrEmployes};{statut};{idClient};{nomClient};{totalSalaire}";
         }
     }
 }

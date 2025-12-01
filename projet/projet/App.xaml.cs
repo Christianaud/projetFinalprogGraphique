@@ -27,6 +27,7 @@ namespace projet
     public partial class App : Application
     {
         private Window? _window;
+        public static Window fenetrePrincipale;
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -44,6 +45,7 @@ namespace projet
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
             _window = new MainWindow();
+            fenetrePrincipale = _window;
             _window.Activate();
         }
     }

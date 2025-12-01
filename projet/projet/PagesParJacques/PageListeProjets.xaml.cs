@@ -39,5 +39,23 @@ namespace projet.PagesParJacques
                 Frame.Navigate(typeof(PageDetailsProjets), newP);
             }
         }
+
+        private async void btnCsvExport_Click(object sender, RoutedEventArgs e)
+        {
+            // Dialogue Avant de pouvoir exporter tout en CSV
+            // Dialogue Apres exportation pour reussite ou message d'erreur
+
+            var picker = new Windows.Storage.Pickers.FileSavePicker();
+            var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(App.fenetrePrincipale);
+            WinRT.Interop.InitializeWithWindow.Initialize(picker, hWnd);
+            picker.SuggestedFileName = "Liste de Projets";
+            picker.FileTypeChoices.Add("Fichier CSV", new List<string>() { ".csv" });
+
+            //crée le fichier
+            Windows.Storage.StorageFile monFichier = await picker.PickSaveFileAsync();
+            if (monFichier != null)
+                await Windows.Storage.FileIO.AppendLinesAsync(monFichier, SingletonListe.getInstance().ListeProjets.ToList<Projet>().ConvertAll(x => x.ToString()), Windows.Storage.Streams.UnicodeEncoding.Utf8);
+
+        }
     }
 }
