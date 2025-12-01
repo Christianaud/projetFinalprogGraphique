@@ -188,7 +188,34 @@ namespace projet.ClassesParJacques
                 Debug.WriteLine(ex.Message);
             }
         }
-        //supprime à une position précise
+
+        public void modifierProjet(string numero, string titre, DateTime dateDebut, string description, int budget, int nbrEmployes, int totalSalaire, int idClient, string statut)
+        {
+            try
+            {
+                using MySqlConnection con = new MySqlConnection(connectionString);
+                using MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "update projet set titre = @titre, dateDebut = @date_debut, description = @description, budget = @budget, nbEmploye = @nbrEmployes, statut = @statut, idClient = @idClient, totalSalaireAPayer = @totalSalaire where numero = @numero";
+                commande.Parameters.AddWithValue("@titre", titre);
+                commande.Parameters.AddWithValue("@date_debut", dateDebut);
+                commande.Parameters.AddWithValue("@description", description);
+                commande.Parameters.AddWithValue("@budget", budget);
+                commande.Parameters.AddWithValue("@nbrEmployes", nbrEmployes);
+                commande.Parameters.AddWithValue("@totalSalaire", totalSalaire);
+                commande.Parameters.AddWithValue("@idClient", idClient);
+                commande.Parameters.AddWithValue("@statut", statut);
+                commande.Parameters.AddWithValue("@numero", numero);
+                con.Open();
+                commande.ExecuteNonQuery();
+
+                getAllClients();
+            }
+            catch (MySqlException ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
         public void supprimerProjet(int id)
         {
             try

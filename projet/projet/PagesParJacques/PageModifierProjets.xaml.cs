@@ -48,6 +48,6 @@ public sealed partial class PageModifierProjets : Page
     }
     private void btnModifier_Click(object sender, RoutedEventArgs e)
     {
-
+        SingletonListe.getInstance().modifierProjet(projet.Numero, tbxTitre.Text, DateTime.Parse(tbxDateDebut.Text), tbxDescription.Text, int.Parse(tbxBudget.Text), int.Parse(tbxNbrEmployes.Text), int.Parse(tbxTotalSalaire.Text), int.Parse(tbxIdClient.Text), tbxStatut.Text);
     }
 }
