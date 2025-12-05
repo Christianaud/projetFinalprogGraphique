@@ -22,22 +22,16 @@ namespace projet.PagesParJacques
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class PageLogin : Page
+    public sealed partial class PageConnexion : Page
     {
-        public PageLogin()
+        public PageConnexion()
         {
             InitializeComponent();
-            SingletonCompte.getInstance().VerifyAdmin();
-            if (SingletonCompte.getInstance().IsConnected)
-            {
-                Frame.Navigate(typeof(PageListeProjets));
-            }
         }
 
         private void btnLogIn_Click(object sender, RoutedEventArgs e)
         {
             // FAIRE LA VALIDATION
-            SingletonCompte.getInstance().setAdmin(tbxUsername.Text, tbxPassword.Text);
             SingletonCompte.getInstance().doesInfoMatch(tbxUsername.Text, tbxPassword.Text);
         }
     }

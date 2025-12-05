@@ -4,6 +4,7 @@ using projet.ClassesParJacques;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ namespace projet.Classes
         string password;
         bool doesAdminExist;
         bool isConnected = false;
+        List<Admin> listeAdmins;
 
         // vv Doit changer vv
 
@@ -32,6 +34,42 @@ namespace projet.Classes
             if (instance == null)
                 instance = new SingletonCompte();
             return instance;
+        }
+
+        public void getAllAdmins()
+        {
+            listeAdmins.Clear();
+
+            try
+            {
+                using MySqlConnection con = new MySqlConnection(connectionString);
+                using MySqlCommand commande = con.CreateCommand();
+                commande.CommandText = "Select * from administrateur";
+                con.Open();
+                using MySqlDataReader r = commande.ExecuteReader();
+                while (r.Read())
+                {
+                    string nomUsager = r.GetString("nomUsager");
+                    string motDePasse = r.GetString("motDePasse");
+                    Admin admin = new Admin(nomUsager, motDePasse);
+                    listeAdmins.Add(admin);
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
+        public bool doesInfoMatch(string nomUtilisateur, string motDePasse)
+        {
+            Admin check = new Admin(nomUtilisateur, motDePasse);
+            if (listeAdmins.Contains(check))
+            {
+                return true;
+                isConnected = true;
+            } else
+                return false;
         }
 
         public bool IsConnected { get => isConnected; set => isConnected = value; }
