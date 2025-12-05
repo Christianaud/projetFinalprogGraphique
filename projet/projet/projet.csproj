@@ -18,9 +18,12 @@
     <None Remove="pages\PageAjoutCl.xaml" />
     <None Remove="pages\pageAjoutEmp.xaml" />
     <None Remove="pages\PageAjouterProjet.xaml" />
+    <None Remove="pages\PageDetailsProjets.xaml" />
     <None Remove="pages\PageEmpDetails.xaml" />
+    <None Remove="pages\PageListeProjet.xaml" />
     <None Remove="pages\PageModifierClient.xaml" />
     <None Remove="pages\PageModifierProjet.xaml" />
+    <None Remove="pages\PageModifierProjets.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -49,6 +52,21 @@
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.7175" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.251106002" />
     <PackageReference Include="MySql.Data" Version="9.5.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="pages\PageModifierProjets.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="pages\PageDetailsProjets.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="pages\PageListeProjet.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="pages\PageAjouterProjet.xaml">

@@ -9,6 +9,22 @@
     mc:Ignorable="d">
 
     <Grid>
+        <ScrollViewer>
+            <StackPanel x:Name="display" Orientation="Vertical" Spacing="20" Padding="20">
+                <TextBlock FontSize="40" FontWeight="ExtraBlack">Details:</TextBlock>
+                <TextBlock x:Name="tbxNumero"/>
+                <TextBlock x:Name="tbxTitre"/>
+                <TextBlock x:Name="tbxStatut"/>
+                <TextBlock x:Name="tbxIdClient"/>
+                <TextBlock x:Name="tbxNomClient"/>
+                <TextBlock x:Name="tbxDateDebut"/>
+                <TextBlock x:Name="tbxDescription"/>
+                <TextBlock x:Name="tbxBudget"/>
+                <TextBlock x:Name="tbxNbrEmployes"/>
+                <TextBlock x:Name="tbxTotalSalaire"/>
 
+                <Button x:Name="btnModifier" Content="Modifier ce Projet" Click="btnModifier_Click"/>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

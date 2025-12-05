@@ -6,6 +6,7 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using projet.classes;
+using projet.Singletons;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -22,10 +23,10 @@ namespace projet.pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class PageDetailsProjets : Page
+    public sealed partial class PageModifierProjets : Page
     {
         Projet projet;
-        public PageDetailsProjets()
+        public PageModifierProjets()
         {
             InitializeComponent();
         }
@@ -35,26 +36,20 @@ namespace projet.pages
             projet = e.Parameter as Projet;
             if (projet != null)
             {
-                tbxNumero.Text = "Numero:\n " + projet.Numero;
-                tbxTitre.Text = "Titre:\n " + projet.Titre;
-                tbxStatut.Text = "Statut:\n " + projet.Statut;
-                tbxDescription.Text = "Description:\n " + projet.Description;
-                tbxDateDebut.Text = "Date de debut:\n " + projet.DateDebut.ToString();
-                tbxIdClient.Text = "Id Client:\n " + projet.IdClient.ToString();
-                tbxBudget.Text = "Budget:\n " + projet.Budget.ToString();
-                tbxNomClient.Text = "Nom Client:\n " + projet.NomClient;
-                tbxNbrEmployes.Text = "Employe:\n " + projet.NbrEmployes.ToString();
+                tbxTitre.Text = "Titre: " + projet.Titre;
+                tbxStatut.Text = "Statut: " + projet.Statut;
+                tbxDescription.Text = "Description: " + projet.Description;
+                tbxDateDebut.Date = projet.DateDebut.Date;
+                tbxIdClient.Text = "Id Client: " + projet.IdClient.ToString();
+                tbxBudget.Text = "Budget: " + projet.Budget.ToString();
+                tbxNomClient.Text = "Nom Client: " + projet.NomClient;
+                tbxNbrEmployes.Text = "Employe: " + projet.NbrEmployes.ToString();
+                tbxTotalSalaire.Text = "Total Salaires: " + projet.TotalSalaire.ToString();
             }
         }
-
         private void btnModifier_Click(object sender, RoutedEventArgs e)
         {
-            Projet newP = projet;
-
-            if (newP != null)
-            {
-                Frame.Navigate(typeof(PageModifierProjets), newP);
-            }
+            SingletonListe.getInstance().modifierProjet(projet.Numero, tbxTitre.Text, tbxDateDebut.Date.DateTime, tbxDescription.Text, int.Parse(tbxBudget.Text), int.Parse(tbxNbrEmployes.Text), int.Parse(tbxTotalSalaire.Text), int.Parse(tbxIdClient.Text), tbxStatut.Text);
         }
     }
 }

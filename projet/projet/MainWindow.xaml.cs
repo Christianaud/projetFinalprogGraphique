@@ -65,7 +65,7 @@ namespace projet
                         //mainFrame.Navigate(typeof(PageAffichCl));
                         break;
                     case "projets":
-                        //mainFrame.Navigate(typeof(PageCommandes));
+                        mainFrame.Navigate(typeof(PageListeProjet));
                         break;
                     default:
                         break;
