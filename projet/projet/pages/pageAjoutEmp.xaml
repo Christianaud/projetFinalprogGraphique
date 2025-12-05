@@ -86,8 +86,8 @@
             <StackPanel Grid.Row="6">
                 <TextBlock Text="Statut" FontWeight="SemiBold"/>
                 <ComboBox x:Name="cmbxStatut">
-                    <ComboBoxItem Content="Permanent"/>
-                    <ComboBoxItem Content="Journalier"/>
+                    <x:String>Permanent</x:String>
+                    <x:String>Journalier</x:String>
                 </ComboBox>
                 <TextBlock x:Name="tblStatutErreur" Foreground="Red"></TextBlock>
             </StackPanel>

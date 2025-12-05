@@ -27,7 +27,6 @@ namespace projet.Singletons
             if (instance == null)
             {
                 instance = new SingletonEmploye();
-
             }
             return instance;
         }
@@ -68,18 +67,17 @@ namespace projet.Singletons
         }
 
         //ajoute un Maison dans la liste
-        public void ajouterEmploye(string matricule, string nom, string prenom, DateTime dateNaissance, string email, string adresse, DateTime dateEmbauche, double tauxHoraire, string photo, string statut)
+        public void ajouterEmploye(string nom, string prenom, DateTime dateNaissance, string email, string adresse, DateTime dateEmbauche, double tauxHoraire, string photo, string statut)
         {
             try
             {
                 using MySqlConnection con = new MySqlConnection(connectionString);
                 using MySqlCommand commande = new MySqlCommand();
                 commande.Connection = con;
-                commande.CommandText = "insert into employe values(@matricule, @nom, @prenom, @dateNaissance, @email, @adresse, @dateEmbauche, @tauxHoraire, @photo, @statut) ";
-                commande.Parameters.AddWithValue("@matricule", matricule);
+                commande.CommandText = "insert into employe values(null, @nom, @prenom, @dateNaissance, @email, @adresse, @dateEmbauche, @tauxHoraire, @photo, @statut, null) ";
                 commande.Parameters.AddWithValue("@nom", nom);
                 commande.Parameters.AddWithValue("@prenom", prenom);
-                commande.Parameters.AddWithValue("@dateNaissane", dateNaissance);
+                commande.Parameters.AddWithValue("@dateNaissance", dateNaissance);
                 commande.Parameters.AddWithValue("@email", email);
                 commande.Parameters.AddWithValue("@adresse", adresse);
                 commande.Parameters.AddWithValue("@dateEmbauche", dateEmbauche);

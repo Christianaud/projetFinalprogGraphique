@@ -191,7 +191,7 @@ public sealed partial class pageAjoutEmp : Page
         string adresse = tbxAdresse.Text;
         string tauxHoraire = nbxTauxHoraire.Text;
         string photo = tbxPhoto.Text;
-        string statut = cmbxStatut.SelectedItem.ToString();
+        string statut = cmbxStatut.SelectedItem as string;
 
         if(modeEdition == true) {
            employeAModifier.Matricule = matricule;
@@ -212,7 +212,7 @@ public sealed partial class pageAjoutEmp : Page
         }else
         {
             Employe nouveauE = new Employe(matricule, nom, prenom, dprNaissance.Date.DateTime, email, adresse,dprEmbauche.Date.DateTime, double.Parse(nbxTauxHoraire.Text), photo, statut);
-            SingletonEmploye.getInstance().ajouterEmploye(matricule, nom, prenom, dprNaissance.Date.DateTime, email, adresse, dprEmbauche.Date.DateTime, double.Parse(nbxTauxHoraire.Text), photo, statut);
+            SingletonEmploye.getInstance().ajouterEmploye( nom, prenom, dprNaissance.Date.DateTime, email, adresse, dprEmbauche.Date.DateTime, double.Parse(nbxTauxHoraire.Text), photo, statut);
         }
 
         tbxMatricule.Text = "";
@@ -243,6 +243,7 @@ public sealed partial class pageAjoutEmp : Page
             tbxPhoto.Text = employeAModifier.Photo;
             cmbxStatut.Text = employeAModifier.Statut;
 
+            modeEdition = true;
             btnAjout.Content = "Modifier";
 
         }

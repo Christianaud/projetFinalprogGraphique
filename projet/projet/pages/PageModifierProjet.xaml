@@ -9,6 +9,29 @@
     mc:Ignorable="d">
 
     <Grid>
+        <StackPanel x:Name="display" Orientation="Vertical" Spacing="20" Padding="20">
+            <TextBlock FontSize="40" FontWeight="ExtraBlack">Modification du Projet:</TextBlock>
+            <TextBox x:Name="tbxTitre"/>
+            <TextBlock x:Name="tblTitreErreur" Foreground="Red" FontSize="14"/>
+            <TextBox x:Name="tbxStatut"/>
+            <TextBlock x:Name="tblStatutErreur" Foreground="Red" FontSize="14"/>
+            <TextBox x:Name="tbxIdClient"/>
+            <TextBlock x:Name="tblIdClientErreur" Foreground="Red" FontSize="14"/>
+            <TextBox x:Name="tbxNomClient"/>
+            <TextBlock x:Name="tblNomClientErreur" Foreground="Red" FontSize="14"/>
+            <TextBox x:Name="tbxDateDebut"/>
+            <TextBlock x:Name="tblDateDebutErreur" Foreground="Red" FontSize="14"/>
+            <TextBox x:Name="tbxDescription"/>
+            <TextBlock x:Name="tblDescriptionErreur" Foreground="Red" FontSize="14"/>
+            <TextBox x:Name="tbxBudget"/>
+            <TextBlock x:Name="tblBudgetErreur" Foreground="Red" FontSize="14"/>
+            <TextBox x:Name="tbxNbrEmployes"/>
+            <TextBlock x:Name="tblNbrEmployesErreur" Foreground="Red" FontSize="14"/>
+            <TextBox x:Name="tbxTotalSalaire"/>
+            <TextBlock x:Name="tblTotalSalaireErreur" Foreground="Red" FontSize="14"/>
+
+            <Button x:Name="btnModifier" Content="Modifier" Click="btnModifier_Click"/>
+        </StackPanel>
 
     </Grid>
 </Page>
