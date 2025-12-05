@@ -63,9 +63,8 @@ namespace projet.pages
             cmbxEmp.SelectedIndex = -1;
         }
 
-        private void btnCreer_Click(object sender, RoutedEventArgs e)
-        {
-            SingletonListe.getInstance().ajouterProjer(
+        private void btnAjouter_Click(object sender, RoutedEventArgs e)
+        {SingletonListe.getInstance().ajouterProjer(
                 tbxTitre.Text,
                 dpDateDebut.Date.DateTime,  
                 tbxDescription.Text,
@@ -75,6 +74,9 @@ namespace projet.pages
                 Convert.ToInt32(tbxIdClient.Text),                  
                 tbxStatut.Text                     
             );
+
+            Projet projetCree = SingletonListe.getInstance().DernierProjet();
+            string numProjet = projetCree.Numero;
 
             foreach (var emp in employesAssignes)
             {

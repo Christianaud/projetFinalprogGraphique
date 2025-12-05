@@ -49,7 +49,6 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <TextBox x:Name=""/>
 
 
             <Button x:Name="btnAjouter" Content="Ajouter" Click="btnAjouter_Click"/>

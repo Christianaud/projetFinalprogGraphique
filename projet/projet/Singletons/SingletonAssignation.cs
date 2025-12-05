@@ -122,5 +122,31 @@ namespace projet.Singletons
             }
         }
 
+        public bool EmployeOccupe(string matricule)
+        {
+            try
+            {
+                using MySqlConnection con = new MySqlConnection(connectionString);
+                using MySqlCommand cmd = con.CreateCommand();
+
+                cmd.CommandText = @"SELECT COUNT(*) 
+                            FROM assignation a 
+                            INNER JOIN projet p ON p.numero = a.projetNumero
+                            WHERE employeMatricule = @mat AND p.statut = 'En cours'";
+
+                cmd.Parameters.AddWithValue("@mat", matricule);
+
+                con.Open();
+                int nb = Convert.ToInt32(cmd.ExecuteScalar());
+                return nb > 0;
+            }
+            catch (MySqlException ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return true;
+            }
+        }
+
+
     }
 }
