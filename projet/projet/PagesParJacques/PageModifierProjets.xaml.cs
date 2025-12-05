@@ -38,7 +38,7 @@ public sealed partial class PageModifierProjets : Page
             tbxTitre.Text = "Titre: " + projet.Titre;
             tbxStatut.Text = "Statut: " + projet.Statut;
             tbxDescription.Text = "Description: " + projet.Description;
-            tbxDateDebut.Text = "Date de debut: " + projet.DateDebut.ToString();
+            tbxDateDebut.Date = projet.DateDebut.Date;
             tbxIdClient.Text = "Id Client: " + projet.IdClient.ToString();
             tbxBudget.Text = "Budget: " + projet.Budget.ToString();
             tbxNomClient.Text = "Nom Client: " + projet.NomClient;
@@ -48,6 +48,6 @@ public sealed partial class PageModifierProjets : Page
     }
     private void btnModifier_Click(object sender, RoutedEventArgs e)
     {
-        SingletonListe.getInstance().modifierProjet(projet.Numero, tbxTitre.Text, DateTime.Parse(tbxDateDebut.Text), tbxDescription.Text, int.Parse(tbxBudget.Text), int.Parse(tbxNbrEmployes.Text), int.Parse(tbxTotalSalaire.Text), int.Parse(tbxIdClient.Text), tbxStatut.Text);
+        SingletonListe.getInstance().modifierProjet(projet.Numero, tbxTitre.Text, tbxDateDebut.Date.DateTime, tbxDescription.Text, int.Parse(tbxBudget.Text), int.Parse(tbxNbrEmployes.Text), int.Parse(tbxTotalSalaire.Text), int.Parse(tbxIdClient.Text), tbxStatut.Text);
     }
 }

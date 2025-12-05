@@ -30,7 +30,7 @@ namespace projet.PagesParJacques
         }
         private void btnAjouter_Click(object sender, RoutedEventArgs e)
         {
-            SingletonListe.getInstance().ajouterProjer(tbxTitre.Text, DateTime.Parse(tbxDateDebut.Text), tbxDescription.Text, int.Parse(tbxBudget.Text), int.Parse(tbxNbrEmployes.Text), int.Parse(tbxTotalSalaire.Text), int.Parse(tbxIdClient.Text), tbxStatut.Text);
+            SingletonListe.getInstance().ajouterProjer(tbxTitre.Text, tbxDateDebut.Date.DateTime, tbxDescription.Text, int.Parse(tbxBudget.Text), int.Parse(tbxNbrEmployes.Text), int.Parse(tbxTotalSalaire.Text), int.Parse(tbxIdClient.Text), tbxStatut.Text);
             ;
         }
     }

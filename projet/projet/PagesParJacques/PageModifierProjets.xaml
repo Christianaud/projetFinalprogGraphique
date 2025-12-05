@@ -15,7 +15,7 @@
             <TextBox x:Name="tbxStatut"/>
             <TextBox x:Name="tbxIdClient"/>
             <TextBox x:Name="tbxNomClient"/>
-            <TextBox x:Name="tbxDateDebut"/>
+            <DatePicker x:Name="tbxDateDebut"/>
             <TextBox x:Name="tbxDescription"/>
             <TextBox x:Name="tbxBudget"/>
             <TextBox x:Name="tbxNbrEmployes"/>
