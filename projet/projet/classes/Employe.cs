@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -195,5 +196,21 @@ namespace projet.classes
         {
             return $"{matricule} - {nom} {prenom} {dateNaissance} {email} {adresse} {dateEmbauche} {tauxHoraire} {photo} {statut}";
         }
+
+        protected bool SetProperty<T>(ref T field, T newValue, [CallerMemberName] string propertyName = null)
+        {
+            if (!Equals(field, newValue))
+            {
+                field = newValue;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+                return true;
+            }
+
+            return false;
+        }
+
+        private object employesAssignes1;
+
+        public object employesAssignes { get => employesAssignes1; set => SetProperty(ref employesAssignes1, value); }
     }
 }
