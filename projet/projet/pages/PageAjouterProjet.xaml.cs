@@ -65,7 +65,7 @@ namespace projet.pages
 
         private void btnCreer_Click(object sender, RoutedEventArgs e)
         {
-            string numProjet = SingletonListe.getInstance().ajouterProjer(
+            SingletonListe.getInstance().ajouterProjer(
                 tbxTitre.Text,
                 dpDateDebut.Date.DateTime,  
                 tbxDescription.Text,
@@ -75,7 +75,6 @@ namespace projet.pages
                 Convert.ToInt32(tbxIdClient.Text),                  
                 tbxStatut.Text                     
             );
-
 
             foreach (var emp in employesAssignes)
             {
