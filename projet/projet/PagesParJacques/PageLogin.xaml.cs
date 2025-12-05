@@ -5,7 +5,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
-using projet.ClassesParJacques;
+using projet.Classes;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -22,15 +22,22 @@ namespace projet.PagesParJacques
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class PageAjouterProjet : Page
+    public sealed partial class PageLogin : Page
     {
-        public PageAjouterProjet()
+        public PageLogin()
         {
             InitializeComponent();
+            SingletonCompte.getInstance().VerifyAdmin();
+            if (SingletonCompte.getInstance().IsConnected)
+            {
+                Frame.Navigate(typeof(PageListeProjets));
+            }
         }
-        private void btnAjouter_Click(object sender, RoutedEventArgs e)
+
+        private void btnLogIn_Click(object sender, RoutedEventArgs e)
         {
-            SingletonListe.getInstance().ajouterProjer(tbxTitre.Text, tbxDateDebut.Date.DateTime, tbxDescription.Text, int.Parse(tbxBudget.Text), int.Parse(tbxNbrEmployes.Text), int.Parse(tbxTotalSalaire.Text), int.Parse(tbxIdClient.Text), tbxStatut.Text);
+            // FAIRE LA VALIDATION
+            SingletonCompte.getInstance().setAdmin(tbxUsername.Text, tbxPassword.Text);
         }
     }
 }

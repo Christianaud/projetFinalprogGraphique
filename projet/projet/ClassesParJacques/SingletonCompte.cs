@@ -34,6 +34,8 @@ namespace projet.Classes
             return instance;
         }
 
+        public bool IsConnected { get => isConnected; set => isConnected = value; }
+
         // Vérifie l'esxistence du compte admin. Lancer au démarrage de l'app.
         public void VerifyAdmin()
         {
