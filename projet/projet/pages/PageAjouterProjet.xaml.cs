@@ -216,8 +216,6 @@ namespace projet.pages
                     salaire
                 );
 
-
-                // Message succès
                 ContentDialog dialog = new ContentDialog
                 {
                     XamlRoot = this.XamlRoot,
@@ -226,6 +224,7 @@ namespace projet.pages
                     CloseButtonText = "OK"
                 };
                 await dialog.ShowAsync();
+                Frame.Navigate(typeof(PageListeProjet));
             }
         }
 

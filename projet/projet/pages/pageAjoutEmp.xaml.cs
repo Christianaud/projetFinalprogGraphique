@@ -88,8 +88,7 @@ public sealed partial class pageAjoutEmp : Page
             {
                 flagValide = false;
                 tblDateNaissanceErreur.Text = "La date de naissance ne peut pas etre dans le futur";
-            }
-            else {
+            }else {
                 DateTime dixHuitAns = DateTime.Now.AddYears(-18);
 
                 if (date_Naissance> dixHuitAns)
@@ -194,7 +193,7 @@ public sealed partial class pageAjoutEmp : Page
         string statut = cmbxStatut.SelectedItem as string;
 
         if(modeEdition == true) {
-           employeAModifier.Matricule = matricule;
+            employeAModifier.Matricule = matricule;
             employeAModifier.Nom = nom;
             employeAModifier.Prenom = prenom;
             employeAModifier.DateNaissance = dprNaissance.Date.DateTime;
@@ -205,6 +204,13 @@ public sealed partial class pageAjoutEmp : Page
             employeAModifier.Photo = photo;
             employeAModifier.Statut = statut;
             SingletonEmploye.getInstance().modifierEmploye(matricule, nom, prenom, email, adresse, double.Parse(nbxTauxHoraire.Text), photo, statut);
+            ContentDialog dialog = new ContentDialog
+            {
+                XamlRoot = this.XamlRoot,
+                Title = "Projet ajouté",
+                Content = $"L'employé {tbxNom.Text} {tbxPrenom.Text} a été modifié avec succès.",
+                CloseButtonText = "OK"
+            };
 
             employeAModifier = null;
             modeEdition = false;
@@ -213,6 +219,13 @@ public sealed partial class pageAjoutEmp : Page
         {
             Employe nouveauE = new Employe(matricule, nom, prenom, dprNaissance.Date.DateTime, email, adresse,dprEmbauche.Date.DateTime, double.Parse(nbxTauxHoraire.Text), photo, statut);
             SingletonEmploye.getInstance().ajouterEmploye( nom, prenom, dprNaissance.Date.DateTime, email, adresse, dprEmbauche.Date.DateTime, double.Parse(nbxTauxHoraire.Text), photo, statut);
+            ContentDialog dialog = new ContentDialog
+            {
+                XamlRoot = this.XamlRoot,
+                Title = "Projet ajouté",
+                Content = $"L'employé {tbxNom.Text} {tbxPrenom.Text} a été créé avec succès.",
+                CloseButtonText = "OK"
+            };
         }
 
         tbxMatricule.Text = "";
@@ -224,7 +237,6 @@ public sealed partial class pageAjoutEmp : Page
         cmbxStatut.SelectedIndex = -1;
 
         Frame.Navigate(typeof(PageAffichEmp));
-
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -248,6 +260,4 @@ public sealed partial class pageAjoutEmp : Page
 
         }
     }
-
-
 }
