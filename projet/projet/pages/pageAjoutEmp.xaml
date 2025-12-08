@@ -34,70 +34,39 @@
                Grid.ColumnSpan="2"
                Margin="0,0,0,20"/>
 
+            <TextBox x:Name="tbxNom" PlaceholderText="Nom" Grid.Row="1" Grid.Column="0" Header="Nom"/>
+            <TextBlock x:Name="tblNomErreur" Foreground="Red" Grid.Row="1" Grid.Column="0"></TextBlock>
+    
+            <TextBox x:Name="tbxPrenom" PlaceholderText="Prénom" Grid.Row="1" Grid.Column="1" Header="Prenom"/>
+            <TextBlock x:Name="tblPrenomErreur" Foreground="Red" Grid.Row="1" Grid.Column="1"></TextBlock>
 
-            <StackPanel Grid.Row="1" Grid.Column="0">
-                <TextBlock Text="Nom" FontWeight="SemiBold"/>
-                <TextBox x:Name="tbxNom" PlaceholderText="Nom"/>
-                <TextBlock x:Name="tblNomErreur" Foreground="Red"></TextBlock>
-            </StackPanel>
+            <DatePicker x:Name="dprNaissance" Grid.Row="2" Grid.Column="0" Header="Date de naissance"/>
+            <TextBlock x:Name="tblDateNaissanceErreur" Foreground="Red" Grid.Row="2" Grid.Column="0"></TextBlock>
 
-            <StackPanel Grid.Row="1" Grid.Column="1">
-                <TextBlock Text="Prénom" FontWeight="SemiBold"/>
-                <TextBox x:Name="tbxPrenom" PlaceholderText="Prénom"/>
-                <TextBlock x:Name="tblPrenomErreur" Foreground="Red"></TextBlock>
-            </StackPanel>
+            <DatePicker x:Name="dprEmbauche" Grid.Row="2" Grid.Column="1" Header="date d'emabuche"/>
+            <TextBlock x:Name="tblDateEmbaucheErreur" Foreground="Red" Grid.Row="2" Grid.Column="0"></TextBlock>
+            
+            <TextBox x:Name="tbxEmail" PlaceholderText="exemple@email.com" Grid.Row="3" Grid.Column="0" Header="Courriel"/>
+            <TextBlock x:Name="tblEmailErreur" Foreground="Red" Grid.Row="3" Grid.Column="0"></TextBlock>
+       
+            <TextBox x:Name="tbxAdresse" PlaceholderText="Adresse complète" Header="Adresse" Grid.Row="3" Grid.Column="1"/>
+            <TextBlock x:Name="tblAdresseErreur" Foreground="Red" Grid.Row="3" Grid.Column="1"></TextBlock>
 
-            <StackPanel Grid.Row="2" Grid.Column="0">
-                <TextBlock x:Name="tbx" Text="Date de naissance" FontWeight="SemiBold"/>
-                <DatePicker x:Name="dprNaissance"/>
-                <TextBlock x:Name="tblDateNaissanceErreur" Foreground="Red"></TextBlock>
-            </StackPanel>
+                <NumberBox x:Name="nbxTauxHoraire" PlaceholderText="Minimum 15$" Minimum="15" SpinButtonPlacementMode="Compact" Grid.Row="4" Grid.Column="0" Header="Taux horaire"/>
+            <TextBlock x:Name="tblTauxHoraireErreur" Foreground="Red" Grid.Row="3" Grid.Column="1"></TextBlock>
 
-            <StackPanel Grid.Row="2" Grid.Column="1">
-                <TextBlock Text="Date d'embauche" FontWeight="SemiBold"/>
-                <DatePicker x:Name="dprEmbauche"/>
-                <TextBlock x:Name="tblDateEmbaucheErreur" Foreground="Red"></TextBlock>
-            </StackPanel>
+            <TextBox x:Name="tbxPhoto" PlaceholderText="https://..." Grid.Row="5" Grid.ColumnSpan="2" Header="Photo (URL)"/>
+            <TextBlock x:Name="tblPhotoErreur" Foreground="Red"  Grid.Row="5" Grid.ColumnSpan="2"></TextBlock>
 
-            <StackPanel Grid.Row="3" Grid.Column="0">
-                <TextBlock Text="Email" FontWeight="SemiBold"/>
-                <TextBox x:Name="tbxEmail" PlaceholderText="exemple@email.com"/>
-                <TextBlock x:Name="tblEmailErreur" Foreground="Red"></TextBlock>
-            </StackPanel>
-
-            <StackPanel Grid.Row="3" Grid.Column="1">
-                <TextBlock Text="Adresse" FontWeight="SemiBold"/>
-                <TextBox x:Name="tbxAdresse" PlaceholderText="Adresse complète"/>
-                <TextBlock x:Name="tblAdresseErreur" Foreground="Red"></TextBlock>
-            </StackPanel>
-
-            <StackPanel Grid.Row="4" Grid.Column="0">
-                <TextBlock Text="Taux horaire ($)" FontWeight="SemiBold"/>
-                <NumberBox x:Name="nbxTauxHoraire" PlaceholderText="Minimum 15$" Minimum="15" SpinButtonPlacementMode="Compact"/>
-                <TextBlock x:Name="tblTauxHoraireErreur" Foreground="Red"></TextBlock>
-            </StackPanel>
-
-            <StackPanel Grid.Row="5" Grid.ColumnSpan="2">
-                <TextBlock Text="Photo (URL)" FontWeight="SemiBold"/>
-                <TextBox x:Name="tbxPhoto" PlaceholderText="https://..."/>
-                <TextBlock x:Name="tblPhotoErreur" Foreground="Red"></TextBlock>
-            </StackPanel>
-
-            <StackPanel Grid.Row="6">
-                <TextBlock Text="Statut" FontWeight="SemiBold"/>
-                <ComboBox x:Name="cmbxStatut">
+            <ComboBox x:Name="cmbxStatut" Grid.Row="6" Header="statut">
                     <x:String>Permanent</x:String>
                     <x:String>Journalier</x:String>
                 </ComboBox>
-                <TextBlock x:Name="tblStatutErreur" Foreground="Red"></TextBlock>
-            </StackPanel>
+            <TextBlock x:Name="tblStatutErreur" Foreground="Red" Grid.Row="6"></TextBlock>
 
-            <StackPanel Grid.Row="7">
-                <TextBox x:Name="tbxMatricule" Text="matricule"/>
-                <TextBlock x:Name="tblMatriculeErreur" Foreground="Red"/>
-
-            </StackPanel>
-
+            <TextBox x:Name="tbxMatricule" Header="matricule" Grid.Row="7"></TextBox>
+            <TextBlock x:Name="tblMatriculeErreur" Foreground="Red" Grid.Row="7"></TextBlock>
+           
             <Button x:Name="btnAjout"
             Content="Ajouter l'employé"
             Grid.Row="8"

@@ -6,13 +6,18 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using projet.classes;
+using projet.dialogue;
 using projet.Singletons;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
@@ -26,17 +31,22 @@ namespace projet.pages
     /// </summary>
     public sealed partial class PageAjouterProjet : Page
     {
-        // Collection des employés assignés
         ObservableCollection<Employe> employesAssignes = new ObservableCollection<Employe>();
+        double totalSalaire = 0; 
+        string numProjet; 
+
 
         public PageAjouterProjet()
         {
             InitializeComponent();
+            SingletonEmploye.getInstance().GetEmployesDisponibles();
+
             cmbxEmp.ItemsSource = SingletonEmploye.getInstance().Liste;
+
             lvAssignations.ItemsSource = employesAssignes;
         }
 
-        private void cmbxEmp_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void cmbxEmp_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Employe emp = cmbxEmp.SelectedItem as Employe;
 
@@ -46,54 +56,178 @@ namespace projet.pages
                 return;
             }
 
-            if (employesAssignes.Contains(emp))
+            if (employesAssignes.Any(x => x.Matricule == emp.Matricule))
             {
-                cmbxEmp.Text = "Cet employé est déjà assigné.";
+                cmbxEmpErreur.Text = "Cet employé est déjà assigné.";
                 return;
             }
 
             if (employesAssignes.Count >= 5)
             {
-                cmbxEmp.Text= "Un projet ne peut pas avoir plus de 5 employés.";
+                cmbxEmpErreur.Text= "Un projet ne peut pas avoir plus de 5 employés.";
                 return;
             }
 
-            employesAssignes.Add(emp);
+            BoiteHeuresDialog dlg = new BoiteHeuresDialog
+            {
+                XamlRoot = this.XamlRoot,
+                Title = $"Heures travaillées pour {emp.Nom} {emp.Prenom}",
+                PrimaryButtonText = "OK",
+                CloseButtonText = "Annuler"
+            };
 
-            cmbxEmp.SelectedIndex = -1;
+            ContentDialogResult result = await dlg.ShowAsync();
+
+            if (result == ContentDialogResult.Primary)
+            {
+                int heures = dlg.Heures;
+                emp.HeuresProjet = heures;
+                double salaire = emp.TauxHoraire * heures;
+
+                employesAssignes.Add(emp);
+                tbxNbrEmployes.Text = employesAssignes.Count.ToString();
+                totalSalaire += salaire;
+                tbxTotalSalaire.Text = totalSalaire.ToString("F2");
+
+                cmbxEmpErreur.Text = "";
+                cmbxEmp.SelectedIndex = -1;
+            }
         }
 
-        private void btnAjouter_Click(object sender, RoutedEventArgs e)
-        {SingletonListe.getInstance().ajouterProjer(
+        private async void btnAjouter_Click(object sender, RoutedEventArgs e)
+        {
+            bool estValide = true;
+
+            // RESET erreurs
+            tbxTitreErreur.Text = "";
+            tbxStatutErreur.Text = "";
+            tbxIdClientErreur.Text = "";
+            tbxNomClientErreur.Text = "";
+            dpDateDebutErreur.Text = "";
+            tbxDescriptionErreur.Text = "";
+            tbxBudgetErreur.Text = "";
+            tbxNbrEmployesErreur.Text = "";
+            tbxTotalSalaireErreur.Text = "";
+            cmbxEmpErreur.Text = "";
+
+            // ------------------------------
+            // VALIDATIONS
+            // ------------------------------
+
+            // Titre
+            if (string.IsNullOrWhiteSpace(tbxTitre.Text))
+            {
+                tbxTitreErreur.Text = "Le titre est obligatoire.";
+                estValide = false;
+            }
+            else if (tbxTitre.Text.Length < 3)
+            {
+                tbxTitreErreur.Text = "Minimum 3 caractères.";
+                estValide = false;
+            }
+
+            // Statut
+            if (string.IsNullOrWhiteSpace(tbxStatut.Text))
+            {
+                tbxStatutErreur.Text = "Le statut est obligatoire.";
+                estValide = false;
+            }
+
+            // ID client
+            if (!int.TryParse(tbxIdClient.Text, out int idClient))
+            {
+                tbxIdClientErreur.Text = "L'ID client doit être un nombre.";
+                estValide = false;
+            }
+
+            // Nom client
+            if (string.IsNullOrWhiteSpace(tbxNomClient.Text))
+            {
+                tbxNomClientErreur.Text = "Nom obligatoire.";
+                estValide = false;
+            }
+
+            // Date
+            if (dpDateDebut.SelectedDate == null)
+            {
+                dpDateDebutErreur.Text = "Date obligatoire.";
+                estValide = false;
+            }
+
+            // Description
+            if (string.IsNullOrWhiteSpace(tbxDescription.Text) || tbxDescription.Text.Length < 10)
+            {
+                tbxDescriptionErreur.Text = "Description trop courte.";
+                estValide = false;
+            }
+
+            // Budget
+            if (!double.TryParse(tbxBudget.Text, out double budget) || budget <= 0)
+            {
+                tbxBudgetErreur.Text = "Budget invalide.";
+                estValide = false;
+            }
+
+            // Employés assignés
+            if (employesAssignes.Count == 0)
+            {
+                tbxNbrEmployesErreur.Text = "Il faut au moins 1 employé.";
+                estValide = false;
+            }
+
+            if (!estValide)
+                return;
+
+            // ------------------------------
+            // AJOUT DU PROJET
+            // ------------------------------
+
+            SingletonListe.getInstance().ajouterProjer(
                 tbxTitre.Text,
-                dpDateDebut.Date.DateTime,  
+                dpDateDebut.Date.DateTime,
                 tbxDescription.Text,
-                Convert.ToDouble(tbxBudget.Text),
-                Convert.ToInt32(tbxNbrEmployes.Text),
-                Convert.ToDouble(tbxTotalSalaire.Text), 
-                Convert.ToInt32(tbxIdClient.Text),                  
-                tbxStatut.Text                     
+                budget,
+                employesAssignes.Count,   // ?? FIX
+                double.Parse(tbxTotalSalaire.Text),
+                idClient,
+                tbxStatut.Text
             );
 
             Projet projetCree = SingletonListe.getInstance().DernierProjet();
             string numProjet = projetCree.Numero;
 
+            // ------------------------------
+            // AJOUT DES ASSIGNATIONS
+            // ------------------------------
             foreach (var emp in employesAssignes)
             {
-                // Vérifier si l'employé est déjà occupé
                 if (SingletonAssignation.getInstance().EmployeOccupe(emp.Matricule))
                 {
-                    cmbxEmp.Text = $"L'employé {emp.Nom} est déjà sur un projet en cours.";
-                    continue; // on saute cet employé
+                    cmbxEmpErreur.Text = $"L'employé {emp.Nom} est déjà sur un projet.";
+                    continue;
                 }
+                int heures = emp.HeuresProjet; // si tu ajoutes cette propriété à Employe temporairement
+                double salaire = emp.TauxHoraire * heures;
 
                 SingletonAssignation.getInstance().ajouterAssignation(
                     numProjet,
                     emp.Matricule,
-                    0, // heures par défaut
-                    0  // salaire par défaut
+                    heures,
+                    salaire
                 );
+
+
+                // Message succès
+                ContentDialog dialog = new ContentDialog
+                {
+                    XamlRoot = this.XamlRoot,
+                    Title = "Projet ajouté",
+                    Content = $"Le projet {tbxTitre.Text} a été créé avec succès.",
+                    CloseButtonText = "OK"
+                };
+                await dialog.ShowAsync();
             }
         }
+
     }
 }

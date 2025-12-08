@@ -42,7 +42,7 @@ namespace projet.pages
             }
         }
 
-        private async void btnCsvExport_Click(object sender, RoutedEventArgs e)
+       private async void btnCsvExport_Click(object sender, RoutedEventArgs e)
         {
             // Dialogue Avant de pouvoir exporter tout en CSV
             // Dialogue Apres exportation pour reussite ou message d'erreur
@@ -58,6 +58,11 @@ namespace projet.pages
             if (monFichier != null)
                 await Windows.Storage.FileIO.AppendLinesAsync(monFichier, SingletonListe.getInstance().ListeProjets.ToList<Projet>().ConvertAll(x => x.ToString()), Windows.Storage.Streams.UnicodeEncoding.Utf8);
 
+        }
+
+        private void appBarAjoutProjet_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(PageAjouterProjet));
         }
     }
 }

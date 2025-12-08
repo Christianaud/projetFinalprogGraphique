@@ -17,16 +17,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
-
         </Grid.RowDefinitions>
-
-        <MenuBar Grid.Row="0" Background="LightBlue">
-            <MenuBarItem Title="Fichier" >
-                <MenuFlyoutItem Text="Importer" Icon="Upload" Click="MenuFlyoutItem_Click" Tag="importer"/>
-                <MenuFlyoutSeparator />
-                <MenuFlyoutItem Text="Exporter" Icon="Share" Click="MenuFlyoutItem_Click" Tag="exporter"/>
-            </MenuBarItem>
-        </MenuBar>
 
         <NavigationView Grid.Row="1" PaneDisplayMode="Left" PaneTitle="Gestion d'une entreprise" x:Name="navView" Background="Aqua" ItemInvoked="navView_ItemInvoked" IsBackButtonVisible="Visible"  IsBackEnabled="True" BackRequested="navView_BackRequested" IsSettingsVisible="False">
 
@@ -43,7 +34,6 @@
                 <NavigationViewItem Content="Aide" x:Name="iAide" Icon="Help" Tag="aide"/>
                 <NavigationViewItem Content="A propos" x:Name="iAPropos" Icon="Help" Tag="apropos"/>
             </NavigationView.FooterMenuItems>
-            <!-- le frame est toujours dans le frame-->
 
             <Frame x:Name="mainFrame" Grid.Row="1"/>
         </NavigationView>

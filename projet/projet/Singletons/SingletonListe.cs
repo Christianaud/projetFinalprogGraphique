@@ -96,7 +96,7 @@ namespace projet.Singletons
                     DateTime dateDebut = r.GetDateTime("dateDebut");
                     string description = r.GetString("description");
                     int budget = r.GetInt32("budget");
-                    int nbrEmployes = r.GetInt32("nbEmploye");
+                    int nbrEmployes = r.GetInt32("nombreEmploye");
                     int totalSalaire = r.GetInt32("totalSalaireAPayer");
                     int idClient = r.GetInt32("idClient");
                     string statut = r.GetString("statut");
@@ -168,13 +168,13 @@ namespace projet.Singletons
                 using MySqlConnection con = new MySqlConnection(connectionString);
                 using MySqlCommand commande = new MySqlCommand();
                 commande.Connection = con;
-                commande.CommandText = "insert into projet values(null, @titre, @date_debut, @description, @budget, @nbrEmployes, @totalSalaire, @idClient, @statut);";
-                commande.Parameters.AddWithValue("@titre", titre);
-                commande.Parameters.AddWithValue("@date_debut", dateDebut);
+                commande.CommandText = "insert into projet values(null, @titre, @dateDebut, @description, @budget, @nombreEmploye, @totalSalaireAPayer, @statut, @idClient);";
+                commande.Parameters.AddWithValue("@titre", titre); 
+                commande.Parameters.AddWithValue("@dateDebut", dateDebut);
                 commande.Parameters.AddWithValue("@description", description);
                 commande.Parameters.AddWithValue("@budget", budget);
-                commande.Parameters.AddWithValue("@nbrEmployes", nbrEmployes);
-                commande.Parameters.AddWithValue("@totalSalaire", totalSalaire);
+                commande.Parameters.AddWithValue("@nombreEmploye", nbrEmployes);
+                commande.Parameters.AddWithValue("@totalSalaireAPayer", totalSalaire);
                 commande.Parameters.AddWithValue("@idClient", idClient);
                 commande.Parameters.AddWithValue("@statut", statut);
                 con.Open();

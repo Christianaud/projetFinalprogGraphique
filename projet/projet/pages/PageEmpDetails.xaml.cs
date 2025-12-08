@@ -37,13 +37,15 @@ namespace projet.pages
             employeAafficher = e.Parameter as Employe;
             if (employeAafficher != null)
             {
-               tbxNom.Text = employeAafficher.Nom;
-                tbxPrenom.Text = employeAafficher.Prenom;
-                tbxEmail.Text= employeAafficher.Email;
-                tbxAdresse.Text= employeAafficher.Adresse;
-                tbxDateEmbauche.Text=employeAafficher.DateEmbauche.ToString();
-                tbxDateNaissance.Text = employeAafficher.DateNaissance.ToString();
-                tbxTauxHoraire.Text = employeAafficher.TauxHoraire.ToString();
+                tbxMatricule.Text = employeAafficher.Matricule;
+                tbxNom.Text += employeAafficher.Nom;
+                tbxPrenom.Text += employeAafficher.Prenom;
+                tbxEmail.Text += employeAafficher.Email;
+                tbxAdresse.Text += employeAafficher.Adresse;
+                tbxDateEmbauche.Text += employeAafficher.DateEmbauche.Date.ToString();
+                tbxDateNaissance.Text += employeAafficher.DateNaissance.ToString();
+                tbxTauxHoraire.Text += employeAafficher.TauxHoraire.ToString();
+                tbxStatut.Text += employeAafficher.Statut.ToString();
 
                 Uri uri = new Uri(employeAafficher.Photo);
                 imgPhoto.Source = new BitmapImage(uri);

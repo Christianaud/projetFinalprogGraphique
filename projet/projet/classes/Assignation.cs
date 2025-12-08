@@ -12,12 +12,12 @@ namespace projet.classes
         int id;
         string projetNumero;
         string employeMatricule;
-        double heuresTravaillees;
+        int heuresTravaillees;
         double salaireProjet;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public Assignation(int id, string projetNumero, string employeMatricule, double heuresTravaillees, double salaireProjet)
+        public Assignation(int id, string projetNumero, string employeMatricule, int heuresTravaillees, double salaireProjet)
         {
             this.id = id;
             this.projetNumero = projetNumero;
@@ -56,7 +56,7 @@ namespace projet.classes
             }
         }
 
-        public double HeuresTravaillees
+        public int HeuresTravaillees
         {
             get { return heuresTravaillees; }
             set

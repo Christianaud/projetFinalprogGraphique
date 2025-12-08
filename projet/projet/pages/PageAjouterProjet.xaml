@@ -13,34 +13,53 @@
     <ScrollViewer>
         <StackPanel x:Name="display" Orientation="Vertical" Spacing="20" Padding="20">
             <TextBlock FontSize="40" FontWeight="ExtraBlack">Addition d'un Projet:</TextBlock>
-            <TextBox x:Name="tbxTitre"/>
-            <TextBox x:Name="tbxStatut"/>
-            <TextBox x:Name="tbxIdClient"/>
-            <TextBox x:Name="tbxNomClient"/>
-            <DatePicker x:Name="dpDateDebut"/>
-            <TextBox x:Name="tbxDescription"/>
-            <TextBox x:Name="tbxBudget"/>
-            <TextBox x:Name="tbxNbrEmployes"/>
-            <TextBox x:Name="tbxTotalSalaire"/>
+
+            <TextBox x:Name="tbxTitre" Header="Titre"/>
+            <TextBlock x:Name="tbxTitreErreur" Foreground="Red" FontSize="12"/>
+
+            <TextBox x:Name="tbxStatut" Header="Statut"/>
+            <TextBlock x:Name="tbxStatutErreur" Foreground="Red" FontSize="12"/>
+
+            <TextBox x:Name="tbxIdClient" Header="idClient"/>
+            <TextBlock x:Name="tbxIdClientErreur" Foreground="Red" FontSize="12"/>
+
+            <TextBox x:Name="tbxNomClient" Header="nomClient"/>
+            <TextBlock x:Name="tbxNomClientErreur" Foreground="Red" FontSize="12"/>
+
+            <DatePicker x:Name="dpDateDebut" Header="date de début"/>
+            <TextBlock x:Name="dpDateDebutErreur" Foreground="Red" FontSize="12"/>
+
+            <TextBox x:Name="tbxDescription" Header="description"/>
+            <TextBlock x:Name="tbxDescriptionErreur" Foreground="Red" FontSize="12"/>
+
+            <TextBox x:Name="tbxBudget" Header="budget"/>
+            <TextBlock x:Name="tbxBudgetErreur" Foreground="Red" FontSize="12"/>
+
+            <TextBox x:Name="tbxNbrEmployes" Header="nombre d'employe" IsReadOnly="True"/>
+            <TextBlock x:Name="tbxNbrEmployesErreur" Foreground="Red" FontSize="12"/>
+
+            <TextBox x:Name="tbxTotalSalaire" Header="salaire des employés" IsReadOnly="True"/>
+            <TextBlock x:Name="tbxTotalSalaireErreur" Foreground="Red" FontSize="12"/>
 
             <ComboBox x:Name="cmbxEmp"
-                DisplayMemberPath="Nom"
+                DisplayMemberPath="NomComplet"
                 Width="200" 
                 SelectionChanged="cmbxEmp_SelectionChanged"/>
             
-            <TextBox x:Name="cmbxEmpErreur"/>
+            <TextBlock x:Name="cmbxEmpErreur" Foreground="Red"/>
+
 
             <ListView x:Name="lvAssignations"
-          ItemsSource="{Binding employesAssignes}"
-          Width="400"
-          Height="200"
-          Margin="10">
+                ItemsSource="{Binding employesAssignes}"
+                Width="400"
+                Height="200"
+                Margin="10">
 
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="local1:Employe">
                         <StackPanel Orientation="Horizontal"
                         Spacing="20"
-                        Background="AliceBlue"
+                        Background="DodgerBlue"
                         Margin="5" Padding="5">
                             <TextBlock Text="{x:Bind Nom}" FontWeight="Bold" FontSize="18" />
                             <TextBlock Text="{x:Bind Prenom}" FontWeight="Bold" FontSize="18" />

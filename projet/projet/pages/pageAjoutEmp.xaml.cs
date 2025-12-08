@@ -241,7 +241,7 @@ public sealed partial class pageAjoutEmp : Page
             dprEmbauche.SelectedDate = new DateTimeOffset( employeAModifier.DateEmbauche);
             nbxTauxHoraire.Text = employeAModifier.TauxHoraire.ToString();
             tbxPhoto.Text = employeAModifier.Photo;
-            cmbxStatut.Text = employeAModifier.Statut;
+            cmbxStatut.SelectedItem = employeAModifier.Statut;
 
             modeEdition = true;
             btnAjout.Content = "Modifier";

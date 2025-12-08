@@ -19,33 +19,39 @@
         <StackPanel Grid.Row="0">
             <TextBlock x:Name="tbxTitreEmp" Text="Listes des employés" FontSize="50" FontWeight="Bold"></TextBlock>
 
-            <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
-                <AppBarButton x:Name="appBarAjoutEmp" Icon="Add" Label="Ajouter" Click="appBarAjoutEmp_Click" Tag="ajoutEmp"/>
+            <CommandBar Background="Transparent"  IsOpen="False" DefaultLabelPosition="Right">
+                <AppBarButton x:Name="appBarAjoutEmp" Icon="Add" Label="Ajouter" Click="appBarAjoutEmp_Click" Tag="ajoutEmp" Background="Gold"/>
             </CommandBar>
         </StackPanel>
         <GridView x:Name="grEmp" Padding="10"  SelectionChanged="grEmp_SelectionChanged" Grid.Row="1">
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="local1:Employe">
-                    <StackPanel Background="CadetBlue"  Height="200" MaxWidth="500" Orientation="Vertical">
-                        <Image x:Name="imgUrlCouverture" Source="{x:Bind Photo}" Height="100" MaxHeight="100" MaxWidth="200"/>
-                        <StackPanel Background="BlanchedAlmond"  Height="75"  Width="250" Orientation="Vertical">
-                            <TextBlock x:Name="tblNom"
-                        FontSize="20"
-                        Foreground="Black"
-                        Text="{x:Bind Nom}"
-                    />
-                            <TextBlock x:Name="tblPrenom"
-                        FontSize="15"
-                        Foreground="Brown"
-                        Text="{x:Bind Prenom}"
-                    />
+                    <StackPanel Background="CadetBlue"  Height="200" Width="300">
+                        <Grid Height="200" Width="300">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="130"/>
+                                <RowDefinition Height="100"/>
+                            </Grid.RowDefinitions>
+                            <Image x:Name="imgUrlCouverture" Source="{x:Bind Photo}" Stretch="Fill" Grid.Row="0"/>
+                            <StackPanel Background="BlanchedAlmond" Orientation="Vertical" Padding="5" Grid.Row="1">
+                                <TextBlock x:Name="tblNom"
+                                        FontSize="20"
+                                        Foreground="Black"
+                                        Text="{x:Bind Nom}"
+                                />
+                                <TextBlock x:Name="tblPrenom"
+                                        FontSize="15"
+                                        Foreground="Brown"
+                                        Text="{x:Bind Prenom}"
+                                />
 
-                            <TextBlock x:Name="tblEmail"
-                       FontSize="15"
-                       Foreground="Blue"
-                       Text="{x:Bind Email}"
-                    />
-                        </StackPanel>
+                                <TextBlock x:Name="tblEmail"
+                                        FontSize="12"
+                                        Foreground="Blue"
+                                        Text="{x:Bind Email}"
+                                />
+                            </StackPanel>
+                        </Grid>
                     </StackPanel>
                 </DataTemplate>
             </GridView.ItemTemplate>

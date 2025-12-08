@@ -13,6 +13,7 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="dialogue\BoiteHeuresDialog.xaml" />
     <None Remove="pages\PageAffichCl.xaml" />
     <None Remove="pages\PageAffichEmp.xaml" />
     <None Remove="pages\PageAjoutCl.xaml" />
@@ -105,6 +106,11 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="pages\pageAjoutEmp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="dialogue\BoiteHeuresDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

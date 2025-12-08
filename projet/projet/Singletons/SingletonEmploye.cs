@@ -121,5 +121,29 @@ namespace projet.Singletons
                 Debug.WriteLine(ex.Message);
             }
         }
+
+        // Méthode pour obtenir uniquement les employés disponibles (non assignés à un projet en cours)
+        public ObservableCollection<Employe> GetEmployesDisponibles()
+        {
+            ObservableCollection<Employe> employesDisponibles = new ObservableCollection<Employe>();
+
+            getAllEmpls();
+
+            var singletonAssignation = SingletonAssignation.getInstance();
+
+            List<string> matriculesOccupes = singletonAssignation.GetMatriculesEmployesOccupes();
+
+            // Filtrer les employés
+            foreach (var emp in listeEmpls)
+            {
+                if (!matriculesOccupes.Contains(emp.Matricule))
+                {
+                    employesDisponibles.Add(emp);
+                }
+            }
+
+            return employesDisponibles;
+        }
     }
-}
+   }
+

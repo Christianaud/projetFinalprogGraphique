@@ -56,7 +56,7 @@ namespace projet.Singletons
                     int id = r.GetInt32("id");
                     string projetNumero = r.GetString("projetNumero");
                     string employeMatricule = r.GetString("employeMatricule");
-                    double heures = r.GetDouble("heuresTravaillees");
+                    int heures = r.GetInt32("heuresTravaillees");
                     double salaire = r.GetDouble("salaireProjet");
 
                     Assignation a = new Assignation(id, projetNumero, employeMatricule, heures, salaire);
@@ -69,7 +69,7 @@ namespace projet.Singletons
             }
         }
 
-        public void ajouterAssignation(string projetNumero, string employeMatricule, double heuresTravaillees, double salaireProjet)
+        public void ajouterAssignation(string projetNumero, string employeMatricule, int heuresTravaillees, double salaireProjet)
         {
             try
             {
@@ -95,7 +95,7 @@ namespace projet.Singletons
             }
         }
 
-        public void modifierAssignation(int id, double heuresTravaillees, double salaireProjet)
+        public void modifierAssignation(int id, int heuresTravaillees, double salaireProjet)
         {
             try
             {
@@ -146,6 +146,45 @@ namespace projet.Singletons
                 return true;
             }
         }
+
+        // Méthode pour obtenir la liste des matricules des employés occupés
+        public List<string> GetMatriculesEmployesOccupes()
+        {
+            List<string> matriculesOccupes = new List<string>();
+
+            try
+            {
+                using MySqlConnection con = new MySqlConnection(connectionString);
+                using MySqlCommand cmd = con.CreateCommand();
+
+                // Sélectionne les employés assignés à des projets "En cours"
+                cmd.CommandText = @"SELECT DISTINCT a.employeMatricule 
+                                FROM assignation a 
+                                INNER JOIN projet p ON p.numero = a.projetNumero
+                                WHERE p.statut = 'En cours'";
+
+                con.Open();
+                using MySqlDataReader r = cmd.ExecuteReader();
+                while (r.Read())
+                {
+                    string matricule = r.GetString("employeMatricule");
+                    matriculesOccupes.Add(matricule);
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+
+            return matriculesOccupes;
+        }
+
+        // Optionnel: Méthode pour vérifier si un employé est disponible
+        public bool EstEmployeDisponible(string matricule)
+        {
+            return !EmployeOccupe(matricule);
+        }
+
 
 
     }

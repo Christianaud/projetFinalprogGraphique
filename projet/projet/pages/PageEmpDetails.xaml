@@ -16,30 +16,30 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0">
-                <Image x:Name="imgPhoto" Height="500" Width="500"/>
+                <Image x:Name="imgPhoto" Height="250" Width="250"/>
             </StackPanel>
 
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="1" Padding="5" Background="Beige"  Width="450">
 
-                <TextBlock x:Name="tbxNom" Text="" FontSize="50" FontWeight="Bold"></TextBlock>
+                <TextBlock x:Name="tbxMatricule" FontWeight="SemiBold" FontSize="50"/>
 
-                <TextBlock x:Name="tbxPrenom" FontWeight="SemiBold" />
+                <TextBlock x:Name="tbxNom"  Text="Nom: "></TextBlock>
 
-                <TextBlock x:Name="tbxMatricule" FontWeight="SemiBold"  Text="Matricule: "/>
+                <TextBlock x:Name="tbxPrenom" FontWeight="SemiBold" Text="Prenom: "/>
 
                 <TextBlock x:Name="tbxDateNaissance" FontWeight="SemiBold" Text="Date de naissance: "/>
 
-                <TextBlock x:Name="tbxEmail" FontWeight="SemiBold"/>
+                <TextBlock x:Name="tbxEmail" FontWeight="SemiBold" Text="Courriel: "/>
 
-                <TextBlock x:Name="tbxAdresse" FontWeight="SemiBold"/>
+                <TextBlock x:Name="tbxAdresse" FontWeight="SemiBold" Text="Adresse: "/>
 
-                <TextBlock x:Name="tbxDateEmbauche" FontWeight="SemiBold" Text="Date d'emabuche: "/>
+                <TextBlock x:Name="tbxDateEmbauche" FontWeight="SemiBold" Text="Date d'embauche: "/>
     
-                <TextBlock x:Name="tbxTauxHoraire" FontWeight="SemiBold"/>
+                <TextBlock x:Name="tbxTauxHoraire" FontWeight="SemiBold" Text="Salaire: "/>
 
-                <TextBlock x:Name="tbxStatut" FontWeight="SemiBold"/>
+                <TextBlock x:Name="tbxStatut" FontWeight="SemiBold" Text="Statut: "/>
 
-                <Button x:Name="btnModifier" Content="Modifier" Click="btnModifier_Click" Background="Orange"></Button>
+                <Button x:Name="btnModifier" Content="Modifier" Click="btnModifier_Click" Background="Orange" HorizontalAlignment="Center"></Button>
             </StackPanel>
 
         </Grid>

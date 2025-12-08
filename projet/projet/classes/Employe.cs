@@ -149,6 +149,12 @@ namespace projet.classes
             }
         }
 
+        public string NomComplet
+        {
+            get { return $"{Nom} {Prenom}"; }
+        }
+
+        public int HeuresProjet { get; set; } = 0;
         public int CompareTo(Employe? other)
         {
             return this.nom.CompareTo(other?.nom);
@@ -196,21 +202,5 @@ namespace projet.classes
         {
             return $"{matricule} - {nom} {prenom} {dateNaissance} {email} {adresse} {dateEmbauche} {tauxHoraire} {photo} {statut}";
         }
-
-        protected bool SetProperty<T>(ref T field, T newValue, [CallerMemberName] string propertyName = null)
-        {
-            if (!Equals(field, newValue))
-            {
-                field = newValue;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-                return true;
-            }
-
-            return false;
-        }
-
-        private object employesAssignes1;
-
-        public object employesAssignes { get => employesAssignes1; set => SetProperty(ref employesAssignes1, value); }
     }
 }
