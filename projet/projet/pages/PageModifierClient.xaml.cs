@@ -32,7 +32,7 @@ namespace projet.pages
             InitializeComponent();
         }
 
-        private void btnModifier_Click(object sender, RoutedEventArgs e)
+        private async void btnModifier_Click(object sender, RoutedEventArgs e)
         {
             bool flagValide = true;
 
@@ -101,7 +101,7 @@ namespace projet.pages
                     flagValide = false;
                     tblNumTelErreur.Text = "Numéro de téléphone trop court !!!";
                 }
-                else if (Regex.IsMatch(tel, valideNumTel))
+                else if (!Regex.IsMatch(tel, valideNumTel))
                 {
                     flagValide = false;
                     tblNumTelErreur.Text = "Le format de téléphone invalide !!!";
@@ -123,6 +123,15 @@ namespace projet.pages
             if (flagValide == true)
             {
                 SingletonListe.getInstance().modifierClient(client.Id, tbxNom.Text, tbxAdresse.Text, tbxNumTel.Text, tbxEmail.Text);
+                ContentDialog dialog = new ContentDialog
+                {
+                    XamlRoot = this.XamlRoot,
+                    Title = " ajouté",
+                    Content = $"Le nom {tbxNom.Text} a été créé avec succès.",
+                    CloseButtonText = "OK"
+                };
+                await dialog.ShowAsync();
+                Frame.Navigate(typeof(PageListeProjet));
             }
         }
 
