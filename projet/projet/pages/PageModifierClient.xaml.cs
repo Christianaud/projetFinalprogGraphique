@@ -36,33 +36,10 @@ namespace projet.pages
         {
             bool flagValide = true;
 
-            tblIdErreur.Text = string.Empty;
             tblNomErreur.Text = string.Empty;
             tblAdresseErreur.Text = string.Empty;
             tblNumTelErreur.Text = string.Empty;
             tblEmailErreur.Text = string.Empty;
-
-            if (string.IsNullOrWhiteSpace(tbxId.Text))
-            {
-                flagValide = false;
-                tblIdErreur.Text = "L'identifiant ne doit pas être vide !!!";
-            }
-            else
-            {
-                int id;
-                bool valideId = int.TryParse(tbxId.Text, out id);
-
-                if (!valideId)
-                {
-                    flagValide = false;
-                    tblIdErreur.Text = "L'identifiant doit être un nombre !!!";
-                }
-                else if (id < 100 || id > 999)
-                {
-                    flagValide = false;
-                    tblIdErreur.Text = "L'identifiant doit être entre 100 et 999 !!!";
-                }
-            }
 
             if (string.IsNullOrWhiteSpace(tbxNom.Text))
             {
