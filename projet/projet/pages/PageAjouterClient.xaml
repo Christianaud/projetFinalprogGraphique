@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="projet.pages.PageAjouterClient"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:projet.pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid>
+        <StackPanel x:Name="display" Orientation="Vertical" Spacing="20" Padding="20">
+            <TextBlock FontSize="40" FontWeight="ExtraBlack">Addition du Client:</TextBlock>
+            <TextBox x:Name="tbxId"/>
+            <TextBlock x:Name="tblIdErreur"/>
+            <TextBox x:Name="tbxNom"/>
+            <TextBlock x:Name="tblNomErreur"/>
+            <TextBox x:Name="tbxAdresse"/>
+            <TextBlock x:Name="tblAdresseErreur"/>
+            <TextBox x:Name="tbxNumTel"/>
+            <TextBlock x:Name="tblNumTelErreur"/>
+            <TextBox x:Name="tbxEmail"/>
+            <TextBlock x:Name="tblEmailErreur"/>
+            <Button x:Name="btnAjouter" Content="Modifier" Click="btnAjouter_Click"/>
+        </StackPanel>
+    </Grid>
+</Page>

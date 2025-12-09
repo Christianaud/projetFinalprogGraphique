@@ -33,7 +33,7 @@ public sealed partial class pageAjoutEmp : Page
         InitializeComponent();
     }
 
-    private void btnAjout_Click(object sender, RoutedEventArgs e)
+    private async void btnAjout_Click(object sender, RoutedEventArgs e)
     {
         bool flagValide = true;
 
@@ -211,7 +211,7 @@ public sealed partial class pageAjoutEmp : Page
                 Content = $"L'employé {tbxNom.Text} {tbxPrenom.Text} a été modifié avec succès.",
                 CloseButtonText = "OK"
             };
-
+            await dialog.ShowAsync();
             employeAModifier = null;
             modeEdition = false;
             btnAjout.Content = "Ajouter";
@@ -226,6 +226,7 @@ public sealed partial class pageAjoutEmp : Page
                 Content = $"L'employé {tbxNom.Text} {tbxPrenom.Text} a été créé avec succès.",
                 CloseButtonText = "OK"
             };
+            await dialog.ShowAsync();
         }
 
         tbxMatricule.Text = "";
@@ -257,7 +258,6 @@ public sealed partial class pageAjoutEmp : Page
 
             modeEdition = true;
             btnAjout.Content = "Modifier";
-
         }
     }
 }

@@ -5,7 +5,6 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
-using projet.classes;
 using projet.Singletons;
 using System;
 using System.Collections.Generic;
@@ -24,15 +23,14 @@ namespace projet.pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class PageModifierClient : Page
+    public sealed partial class PageAjouterClient : Page
     {
-        Client client;
-        public PageModifierClient()
+        public PageAjouterClient()
         {
             InitializeComponent();
         }
 
-        private void btnModifier_Click(object sender, RoutedEventArgs e)
+        private void btnAjouter_Click(object sender, RoutedEventArgs e)
         {
             bool flagValide = true;
 
@@ -120,22 +118,11 @@ namespace projet.pages
                 tblEmailErreur.Text = "Le format email invalide !!!";
             }
 
-            if (flagValide == true)
+            if(flagValide == true)
             {
-                SingletonListe.getInstance().modifierClient(client.Id, tbxNom.Text, tbxAdresse.Text, tbxNumTel.Text, tbxEmail.Text);
+                SingletonListe.getInstance().ajouterClient(tbxNom.Text, tbxAdresse.Text, tbxNumTel.Text, tbxEmail.Text);
             }
-        }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            client = e.Parameter as Client;
-            if (client != null)
-            {
-                tbxNom.Text = "Nom: " + client.Nom;
-                tbxAdresse.Text = "Adresse: " + client.Adresse;
-                tbxNumTel.Text = "Telephone: " + client.Num_tel;
-                tbxEmail.Text = "Email: " + client.Email.ToString();
-            }
         }
     }
 }

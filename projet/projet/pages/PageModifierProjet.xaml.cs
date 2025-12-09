@@ -162,7 +162,6 @@ namespace projet.pages
                 flagValide = false;
                 tblTotalSalaireErreur.Text = "Le total des salaires doit être un nombre !!!";
             }
-
         }
     }
 }

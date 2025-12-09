@@ -98,7 +98,6 @@ namespace projet.pages
         {
             bool estValide = true;
 
-            // RESET erreurs
             tbxTitreErreur.Text = "";
             tbxStatutErreur.Text = "";
             tbxIdClientErreur.Text = "";
@@ -110,9 +109,6 @@ namespace projet.pages
             tbxTotalSalaireErreur.Text = "";
             cmbxEmpErreur.Text = "";
 
-            // ------------------------------
-            // VALIDATIONS
-            // ------------------------------
 
             // Titre
             if (string.IsNullOrWhiteSpace(tbxTitre.Text))
@@ -178,9 +174,7 @@ namespace projet.pages
             if (!estValide)
                 return;
 
-            // ------------------------------
             // AJOUT DU PROJET
-            // ------------------------------
 
             SingletonListe.getInstance().ajouterProjer(
                 tbxTitre.Text,
@@ -196,9 +190,7 @@ namespace projet.pages
             Projet projetCree = SingletonListe.getInstance().DernierProjet();
             string numProjet = projetCree.Numero;
 
-            // ------------------------------
-            // AJOUT DES ASSIGNATIONS
-            // ------------------------------
+            // assignation
             foreach (var emp in employesAssignes)
             {
                 if (SingletonAssignation.getInstance().EmployeOccupe(emp.Matricule))
@@ -206,7 +198,7 @@ namespace projet.pages
                     cmbxEmpErreur.Text = $"L'employé {emp.Nom} est déjà sur un projet.";
                     continue;
                 }
-                int heures = emp.HeuresProjet; // si tu ajoutes cette propriété à Employe temporairement
+                int heures = emp.HeuresProjet;
                 double salaire = emp.TauxHoraire * heures;
 
                 SingletonAssignation.getInstance().ajouterAssignation(

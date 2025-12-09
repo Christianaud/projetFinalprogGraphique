@@ -62,7 +62,7 @@ namespace projet
                         mainFrame.Navigate(typeof(PageAffichEmp));
                         break;
                     case "clients":
-                        mainFrame.Navigate(typeof(Page));
+                        mainFrame.Navigate(typeof(PageListeClients));
                         break;
                     case "projets":
                         mainFrame.Navigate(typeof(PageListeProjet));
