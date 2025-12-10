@@ -8,10 +8,46 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid>
-        <TextBlock>Entrez Nouvel Administrateur:</TextBlock>
-        <TextBox x:Name="tbxUsername" PlaceholderText="Exemple: John"/>
-        <TextBox x:Name="tbxPassword" PlaceholderText="Exemple: Secret1234"/>
-        <Button x:Name="btnLogIn" Click="btnLogIn_Click"/>
+    <Grid Margin="40" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0"
+               Text="Se connecter Administrateur:"
+               FontSize="18"
+               FontWeight="SemiBold"
+               Margin="0,0,0,20"
+               HorizontalAlignment="Center"/>
+
+        <TextBox Grid.Row="1"
+             x:Name="tbxUsername"
+             PlaceholderText="Exemple: John"
+             Height="40"
+             Width="300"
+             HorizontalAlignment="Center"
+             Margin="0,0,0,15"/>
+
+        <TextBox Grid.Row="2"
+             x:Name="tbxPassword"
+             PlaceholderText="Exemple: Secret1234"
+             Height="40"
+             Width="300"
+             HorizontalAlignment="Center"
+             Margin="0,0,0,20"/>
+
+        <Button Grid.Row="3"
+            x:Name="btnLogIn"
+            Content="Se connecter"
+            Click="btnLogIn_Click"
+            Width="120"
+            Height="40"
+            HorizontalAlignment="Center"
+            Background="#0078D4"
+            Foreground="White"
+            CornerRadius="4"/>
     </Grid>
 </Page>

@@ -30,6 +30,7 @@ namespace projet
         public MainWindow()
         {
             InitializeComponent();
+            mainFrame.Navigate(typeof(PageConnexion));
         }
 
         private void MenuFlyoutItem_Click(object sender, RoutedEventArgs e)
@@ -70,12 +71,12 @@ namespace projet
                     case "deconnexion":
                         ContentDialog dialog = new ContentDialog
                         {
-                            XamlRoot = this.XamlRoot, // ? Ajouter cette ligne
                             Title = "Déconnexion",
                             Content = "Voulez-vous vraiment vous déconnecter ?",
                             PrimaryButtonText = "Oui",
                             CloseButtonText = "Non",
-                            DefaultButton = ContentDialogButton.Close
+                            DefaultButton = ContentDialogButton.Close,
+                            XamlRoot = this.Content.XamlRoot 
                         };
 
                         ContentDialogResult result = await dialog.ShowAsync();

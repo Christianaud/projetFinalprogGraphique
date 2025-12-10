@@ -32,7 +32,7 @@ namespace projet.pages
         private void btnLogIn_Click(object sender, RoutedEventArgs e)
         {
             // FAIRE LA VALIDATION
-            //SingletonCompte.getInstance().doesInfoMatch(tbxUsername.Text, tbxPassword.Text);
+            SingletonCompte.getInstance().doesInfoMatch(tbxUsername.Text, tbxPassword.Text);
         }
     }
 }
