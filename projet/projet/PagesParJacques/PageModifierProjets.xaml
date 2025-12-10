@@ -12,13 +12,14 @@
         <StackPanel x:Name="display" Orientation="Vertical" Spacing="20" Padding="20">
             <TextBlock FontSize="40" FontWeight="ExtraBlack">Modification du Projet:</TextBlock>
             <TextBox x:Name="tbxTitre"/>
-            <TextBox x:Name="tbxStatut"/>
+            <ComboBox x:Name="cbxStatut">
+                <x:String>En cours</x:String>
+                <x:String>Terminé</x:String>
+            </ComboBox>
             <TextBox x:Name="tbxIdClient"/>
-            <TextBox x:Name="tbxNomClient"/>
             <DatePicker x:Name="tbxDateDebut"/>
             <TextBox x:Name="tbxDescription"/>
             <TextBox x:Name="tbxBudget"/>
-            <TextBox x:Name="tbxNbrEmployes"/>
             <TextBox x:Name="tbxTotalSalaire"/>
 
             <Button x:Name="btnModifier" Content="Modifier" Click="btnModifier_Click"/>

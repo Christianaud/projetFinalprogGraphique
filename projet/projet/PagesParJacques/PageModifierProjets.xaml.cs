@@ -36,18 +36,16 @@ public sealed partial class PageModifierProjets : Page
         if (projet != null)
         {
             tbxTitre.Text = "Titre: " + projet.Titre;
-            tbxStatut.Text = "Statut: " + projet.Statut;
             tbxDescription.Text = "Description: " + projet.Description;
             tbxDateDebut.Date = projet.DateDebut.Date;
             tbxIdClient.Text = "Id Client: " + projet.IdClient.ToString();
             tbxBudget.Text = "Budget: " + projet.Budget.ToString();
-            tbxNomClient.Text = "Nom Client: " + projet.NomClient;
-            tbxNbrEmployes.Text = "Employe: " + projet.NbrEmployes.ToString();
+            cbxStatut.SelectedItem = projet.Statut;
             tbxTotalSalaire.Text = "Total Salaires: " + projet.TotalSalaire.ToString();
         }
     }
     private void btnModifier_Click(object sender, RoutedEventArgs e)
     {
-        SingletonListe.getInstance().modifierProjet(projet.Numero, tbxTitre.Text, tbxDateDebut.Date.DateTime, tbxDescription.Text, int.Parse(tbxBudget.Text), int.Parse(tbxNbrEmployes.Text), int.Parse(tbxTotalSalaire.Text), int.Parse(tbxIdClient.Text), tbxStatut.Text);
+        SingletonListe.getInstance().modifierProjet(projet.Numero, tbxTitre.Text, tbxDateDebut.Date.DateTime, tbxDescription.Text, int.Parse(tbxBudget.Text), 0, int.Parse(tbxTotalSalaire.Text), int.Parse(tbxIdClient.Text), cbxStatut.SelectedItem as string);
     }
 }
