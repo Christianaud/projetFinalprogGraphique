@@ -70,6 +70,7 @@ namespace projet
                     case "deconnexion":
                         ContentDialog dialog = new ContentDialog
                         {
+                            XamlRoot = this.XamlRoot, // ? Ajouter cette ligne
                             Title = "Déconnexion",
                             Content = "Voulez-vous vraiment vous déconnecter ?",
                             PrimaryButtonText = "Oui",
@@ -81,9 +82,7 @@ namespace projet
 
                         if (result == ContentDialogResult.Primary)
                         {
-                            // Ici tu mets la logique de déconnexion
-                            // Par exemple, retourner à la page de connexion
-                            //Frame.Navigate(typeof(PageConnexion));
+                            mainFrame.Navigate(typeof(PageConnexion));
                         }
                         break;
                     default:
