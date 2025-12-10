@@ -196,11 +196,12 @@ namespace projet.ClassesParJacques
                 using MySqlConnection con = new MySqlConnection(connectionString);
                 using MySqlCommand commande = new MySqlCommand();
                 commande.Connection = con;
-                commande.CommandText = "update projet set titre = @titre, dateDebut = @date_debut, description = @description, budget = @budget, nombreEmploye = 1, statut = @statut, idClient = @idClient, totalSalaireAPayer = @totalSalaire where numero = @numero";
+                commande.CommandText = "update projet set titre = @titre, dateDebut = @date_debut, description = @description, budget = @budget, nombreEmploye = @nombreEmploye, statut = @statut, idClient = @idClient, totalSalaireAPayer = @totalSalaire where numero = @numero";
                 commande.Parameters.AddWithValue("@titre", titre);
                 commande.Parameters.AddWithValue("@date_debut", dateDebut);
                 commande.Parameters.AddWithValue("@description", description);
                 commande.Parameters.AddWithValue("@budget", budget);
+                commande.Parameters.AddWithValue("@nombreEmploye", nbrEmployes);
                 commande.Parameters.AddWithValue("@totalSalaire", totalSalaire);
                 commande.Parameters.AddWithValue("@idClient", idClient);
                 commande.Parameters.AddWithValue("@statut", statut);
