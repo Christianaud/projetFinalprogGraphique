@@ -5,6 +5,8 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using projet.Classes;
+using projet.Singletons;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,6 +28,18 @@ namespace projet.pages
         public PageLogin()
         {
             InitializeComponent();
+            SingletonCompte.getInstance().VerifyAdmin();
+            if (SingletonCompte.getInstance().IsConnected)
+            {
+                Frame.Navigate(typeof(PageListeProjet));
+            }
+        }
+
+        private void btnLogIn_Click(object sender, RoutedEventArgs e)
+        {
+            // FAIRE LA VALIDATION
+            SingletonCompte.getInstance().setAdmin(tbxUsername.Text, tbxPassword.Text);
+            SingletonCompte.getInstance().doesInfoMatch(tbxUsername.Text, tbxPassword.Text);
         }
     }
 }
