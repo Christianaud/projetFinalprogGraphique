@@ -11,8 +11,6 @@
     <Grid>
         <StackPanel x:Name="display" Orientation="Vertical" Spacing="20" Padding="20">
             <TextBlock FontSize="40" FontWeight="ExtraBlack">Modification du Client:</TextBlock>
-            <TextBox x:Name="tbxId"/>
-            <TextBlock x:Name="tblIdErreur"/>
             <TextBox x:Name="tbxNom"/>
             <TextBlock x:Name="tblNomErreur"/>
             <TextBox x:Name="tbxAdresse"/>

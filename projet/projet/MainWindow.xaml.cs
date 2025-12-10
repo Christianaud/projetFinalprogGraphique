@@ -52,7 +52,7 @@ namespace projet
 
         }
 
-        private void navView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+        private async void navView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
             if (args.InvokedItemContainer is NavigationViewItem item)
             {
@@ -66,6 +66,18 @@ namespace projet
                         break;
                     case "projets":
                         mainFrame.Navigate(typeof(PageListeProjet));
+                        break;
+                    case "deconnexion":
+                        ContentDialog dialog = new ContentDialog
+                        {
+                            Title = "Déconnexion",
+                            Content = "Voulez-vous vraiment vous déconnecter ?",
+                            PrimaryButtonText = "Oui",
+                            CloseButtonText = "Non",
+                            DefaultButton = ContentDialogButton.Close
+                        };
+
+                        ContentDialogResult result = await dialog.ShowAsync();
                         break;
                     default:
                         break;

@@ -99,7 +99,7 @@ namespace projet.pages
                     flagValide = false;
                     tblNumTelErreur.Text = "Numéro de téléphone trop court !!!";
                 }
-                else if (Regex.IsMatch(tel, valideNumTel))
+                else if (!Regex.IsMatch(tel, valideNumTel))
                 {
                     flagValide = false;
                     tblNumTelErreur.Text = "Le format de téléphone invalide !!!";

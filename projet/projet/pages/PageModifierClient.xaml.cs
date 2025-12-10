@@ -13,6 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
@@ -103,12 +104,13 @@ namespace projet.pages
                 ContentDialog dialog = new ContentDialog
                 {
                     XamlRoot = this.XamlRoot,
-                    Title = " ajouté",
-                    Content = $"Le nom {tbxNom.Text} a été créé avec succès.",
+                    Title = " Le client modifié ",
+                    Content = $"Le client {tbxNom.Text} a été modifié avec succès.",
                     CloseButtonText = "OK"
                 };
                 await dialog.ShowAsync();
-                Frame.Navigate(typeof(PageListeProjet));
+                await Task.Delay(100);
+                Frame.Navigate(typeof(PageListeClients));
             }
         }
 

@@ -37,7 +37,6 @@ public sealed partial class pageAjoutEmp : Page
     {
         bool flagValide = true;
 
-        tblMatriculeErreur.Text = string.Empty;
         tblNomErreur.Text = string.Empty;
         tblPrenomErreur.Text = string.Empty;
         tblDateNaissanceErreur.Text = string.Empty;
@@ -47,14 +46,6 @@ public sealed partial class pageAjoutEmp : Page
         tblTauxHoraireErreur.Text = string.Empty;
         tblPhotoErreur.Text = string.Empty ;
         tblStatutErreur.Text = string.Empty ;
-
-        // validation matricule
-        if (string.IsNullOrWhiteSpace(tbxMatricule.Text))
-        {
-            flagValide = false;
-            tblMatriculeErreur.Text = "Le champs matricule ne doit etre vide !!!";
-
-        }
 
         if (string.IsNullOrWhiteSpace(tbxNom.Text))
         {
@@ -181,7 +172,6 @@ public sealed partial class pageAjoutEmp : Page
         // on arrete si une erreur existe
         if (flagValide == false) return;
 
-        string matricule = tbxMatricule.Text;
         string nom = tbxNom.Text;
         string prenom = tbxPrenom.Text;
         string dateNaissance = dprNaissance.Date.DateTime.ToString();
@@ -193,7 +183,6 @@ public sealed partial class pageAjoutEmp : Page
         string statut = cmbxStatut.SelectedItem as string;
 
         if(modeEdition == true) {
-            employeAModifier.Matricule = matricule;
             employeAModifier.Nom = nom;
             employeAModifier.Prenom = prenom;
             employeAModifier.DateNaissance = dprNaissance.Date.DateTime;
@@ -203,11 +192,11 @@ public sealed partial class pageAjoutEmp : Page
             employeAModifier.TauxHoraire = double.Parse(nbxTauxHoraire.Text);
             employeAModifier.Photo = photo;
             employeAModifier.Statut = statut;
-            SingletonEmploye.getInstance().modifierEmploye(matricule, nom, prenom, email, adresse, double.Parse(nbxTauxHoraire.Text), photo, statut);
+            SingletonEmploye.getInstance().modifierEmploye(employeAModifier.Matricule, nom, prenom, email, adresse, double.Parse(nbxTauxHoraire.Text), photo, statut);
             ContentDialog dialog = new ContentDialog
             {
                 XamlRoot = this.XamlRoot,
-                Title = "Projet ajouté",
+                Title = "Modification employé",
                 Content = $"L'employé {tbxNom.Text} {tbxPrenom.Text} a été modifié avec succès.",
                 CloseButtonText = "OK"
             };
@@ -217,19 +206,17 @@ public sealed partial class pageAjoutEmp : Page
             btnAjout.Content = "Ajouter";
         }else
         {
-            Employe nouveauE = new Employe(matricule, nom, prenom, dprNaissance.Date.DateTime, email, adresse,dprEmbauche.Date.DateTime, double.Parse(nbxTauxHoraire.Text), photo, statut);
             SingletonEmploye.getInstance().ajouterEmploye( nom, prenom, dprNaissance.Date.DateTime, email, adresse, dprEmbauche.Date.DateTime, double.Parse(nbxTauxHoraire.Text), photo, statut);
             ContentDialog dialog = new ContentDialog
             {
                 XamlRoot = this.XamlRoot,
-                Title = "Projet ajouté",
+                Title = "Ajout employé",
                 Content = $"L'employé {tbxNom.Text} {tbxPrenom.Text} a été créé avec succès.",
                 CloseButtonText = "OK"
             };
             await dialog.ShowAsync();
         }
 
-        tbxMatricule.Text = "";
         tbxNom.Text = "";
         tbxEmail.Text = "";
         tbxAdresse.Text = "";
@@ -245,7 +232,6 @@ public sealed partial class pageAjoutEmp : Page
         employeAModifier = e.Parameter as Employe;
         if (employeAModifier != null)
         {
-            tbxMatricule.Text = employeAModifier.Matricule;
             tbxNom.Text = employeAModifier.Nom;
             tbxPrenom.Text = employeAModifier.Prenom;
             dprNaissance.SelectedDate = new DateTimeOffset(employeAModifier.DateNaissance);

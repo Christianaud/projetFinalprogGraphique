@@ -74,7 +74,7 @@ namespace projet.Singletons
                 using MySqlConnection con = new MySqlConnection(connectionString);
                 using MySqlCommand commande = new MySqlCommand();
                 commande.Connection = con;
-                commande.CommandText = "insert into employe values(null, @nom, @prenom, @dateNaissance, @email, @adresse, @dateEmbauche, @tauxHoraire, @photo, @statut, null) ";
+                commande.CommandText = "insert into employe values(null, @nom, @prenom, @dateNaissance, @email, @adresse, @dateEmbauche, @tauxHoraire, @photo, @statut) ";
                 commande.Parameters.AddWithValue("@nom", nom);
                 commande.Parameters.AddWithValue("@prenom", prenom);
                 commande.Parameters.AddWithValue("@dateNaissance", dateNaissance);
@@ -87,6 +87,7 @@ namespace projet.Singletons
 
                 con.Open();
                 commande.ExecuteNonQuery();
+                getAllEmpls();
 
             }
             catch (MySqlException ex)

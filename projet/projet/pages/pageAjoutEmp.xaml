@@ -8,76 +8,105 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid>
-        <Grid Padding="30" RowSpacing="20" ColumnSpacing="20">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+        <ScrollViewer>
+            <Grid Padding="30" RowSpacing="8" ColumnSpacing="20">
 
-            <TextBlock Grid.Row="0"
-               Text="Formulaire Employé"
-               FontSize="28"
-               FontWeight="SemiBold"
-               Grid.ColumnSpan="2"
-               Margin="0,0,0,20"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-            <TextBox x:Name="tbxNom" PlaceholderText="Nom" Grid.Row="1" Grid.Column="0" Header="Nom"/>
-            <TextBlock x:Name="tblNomErreur" Foreground="Red" Grid.Row="1" Grid.Column="0"></TextBlock>
-    
-            <TextBox x:Name="tbxPrenom" PlaceholderText="Prénom" Grid.Row="1" Grid.Column="1" Header="Prenom"/>
-            <TextBlock x:Name="tblPrenomErreur" Foreground="Red" Grid.Row="1" Grid.Column="1"></TextBlock>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
 
-            <DatePicker x:Name="dprNaissance" Grid.Row="2" Grid.Column="0" Header="Date de naissance"/>
-            <TextBlock x:Name="tblDateNaissanceErreur" Foreground="Red" Grid.Row="2" Grid.Column="0"></TextBlock>
+                    <RowDefinition Height="Auto"/>
+                    <!-- Erreurs -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Matricule -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Erreurs -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Bouton -->
+                </Grid.RowDefinitions>
 
-            <DatePicker x:Name="dprEmbauche" Grid.Row="2" Grid.Column="1" Header="date d'emabuche"/>
-            <TextBlock x:Name="tblDateEmbaucheErreur" Foreground="Red" Grid.Row="2" Grid.Column="0"></TextBlock>
-            
-            <TextBox x:Name="tbxEmail" PlaceholderText="exemple@email.com" Grid.Row="3" Grid.Column="0" Header="Courriel"/>
-            <TextBlock x:Name="tblEmailErreur" Foreground="Red" Grid.Row="3" Grid.Column="0"></TextBlock>
-       
-            <TextBox x:Name="tbxAdresse" PlaceholderText="Adresse complète" Header="Adresse" Grid.Row="3" Grid.Column="1"/>
-            <TextBlock x:Name="tblAdresseErreur" Foreground="Red" Grid.Row="3" Grid.Column="1"></TextBlock>
+                <!-- TITRE -->
+                <TextBlock Grid.Row="0" Grid.ColumnSpan="2"
+                       Text="Formulaire Employé"
+                       FontSize="28"
+                       FontWeight="SemiBold"
+                       Margin="0,0,0,15"/>
 
-                <NumberBox x:Name="nbxTauxHoraire" PlaceholderText="Minimum 15$" Minimum="15" SpinButtonPlacementMode="Compact" Grid.Row="4" Grid.Column="0" Header="Taux horaire"/>
-            <TextBlock x:Name="tblTauxHoraireErreur" Foreground="Red" Grid.Row="3" Grid.Column="1"></TextBlock>
+                <!-- NOM / PRENOM -->
+                <TextBox x:Name="tbxNom" Grid.Row="1" Grid.Column="0" Header="Nom"/>
+                <TextBox x:Name="tbxPrenom" Grid.Row="1" Grid.Column="1" Header="Prénom"/>
 
-            <TextBox x:Name="tbxPhoto" PlaceholderText="https://..." Grid.Row="5" Grid.ColumnSpan="2" Header="Photo (URL)"/>
-            <TextBlock x:Name="tblPhotoErreur" Foreground="Red"  Grid.Row="5" Grid.ColumnSpan="2"></TextBlock>
+                <TextBlock x:Name="tblNomErreur" Grid.Row="2" Grid.Column="0" Foreground="Red"/>
+                <TextBlock x:Name="tblPrenomErreur" Grid.Row="2" Grid.Column="1" Foreground="Red"/>
 
-            <ComboBox x:Name="cmbxStatut" Grid.Row="6" Header="statut">
+                <!-- NAISSANCE / EMBAUCHE -->
+                <DatePicker x:Name="dprNaissance" Grid.Row="3" Grid.Column="0" Header="Date de naissance"/>
+                <DatePicker x:Name="dprEmbauche" Grid.Row="3" Grid.Column="1" Header="Date d'embauche"/>
+
+                <TextBlock x:Name="tblDateNaissanceErreur" Grid.Row="4" Grid.Column="0" Foreground="Red"/>
+                <TextBlock x:Name="tblDateEmbaucheErreur" Grid.Row="4" Grid.Column="1" Foreground="Red"/>
+
+                <!-- EMAIL / ADRESSE -->
+                <TextBox x:Name="tbxEmail" Grid.Row="5" Grid.Column="0" Header="Courriel" PlaceholderText="exemple@email.com"/>
+                <TextBox x:Name="tbxAdresse" Grid.Row="5" Grid.Column="1" Header="Adresse" PlaceholderText="Adresse complète"/>
+
+                <TextBlock x:Name="tblEmailErreur" Grid.Row="6" Grid.Column="0" Foreground="Red"/>
+                <TextBlock x:Name="tblAdresseErreur" Grid.Row="6" Grid.Column="1" Foreground="Red"/>
+
+                <!-- TAUX HORAIRE -->
+                <NumberBox x:Name="nbxTauxHoraire"
+                       Grid.Row="7" Grid.Column="0"
+                       Header="Taux horaire"
+                       PlaceholderText="Minimum 15$"
+                       Minimum="15"
+                       SpinButtonPlacementMode="Compact"/>
+
+                <TextBlock x:Name="tblTauxHoraireErreur" Grid.Row="8" Grid.Column="0" Foreground="Red"/>
+
+                <!-- PHOTO -->
+                <TextBox x:Name="tbxPhoto"
+                     Grid.Row="9" Grid.ColumnSpan="2"
+                     Header="Photo (URL)"
+                     PlaceholderText="https://..."/>
+
+                <TextBlock x:Name="tblPhotoErreur" Grid.Row="10" Grid.ColumnSpan="2" Foreground="Red"/>
+
+                <!-- STATUT -->
+                <ComboBox x:Name="cmbxStatut"
+                      Grid.Row="11"
+                      Grid.Column="0"
+                      Header="Statut">
                     <x:String>Permanent</x:String>
                     <x:String>Journalier</x:String>
                 </ComboBox>
-            <TextBlock x:Name="tblStatutErreur" Foreground="Red" Grid.Row="6"></TextBlock>
 
-            <TextBox x:Name="tbxMatricule" Header="matricule" Grid.Row="7"></TextBox>
-            <TextBlock x:Name="tblMatriculeErreur" Foreground="Red" Grid.Row="7"></TextBlock>
-           
-            <Button x:Name="btnAjout"
-            Content="Ajouter l'employé"
-            Grid.Row="8"
-            Grid.ColumnSpan="2"
-            HorizontalAlignment="Stretch"
-            Height="45"
-            Background="#0078D4"
-            Foreground="White"
-            FontWeight="Bold"
-                    Click="btnAjout_Click"
-            />
-        </Grid>
-    </Grid>
+            <TextBlock x:Name="tblStatutErreur" Grid.Row="12" Grid.Column="0" Foreground="Red"/>
+
+            <!-- BOUTON AJOUT -->
+                <Button x:Name="btnAjout"
+                    Content="Ajouter l'employé"
+                    Grid.Row="15"
+                    Grid.ColumnSpan="2"
+                    Height="45"
+                    Background="#0078D4"
+                    Foreground="White"
+                    FontWeight="Bold"
+                    Click="btnAjout_Click"/>
+            </Grid>
+            </ScrollViewer>
 </Page>
