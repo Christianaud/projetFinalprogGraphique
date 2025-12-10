@@ -9,17 +9,29 @@
     mc:Ignorable="d">
 
     <ScrollViewer>
-        <StackPanel x:Name="display" Orientation="Vertical" Spacing="20" Padding="20">
-            <TextBlock FontSize="40" FontWeight="ExtraBlack">Modification du Projet:</TextBlock>
-            <TextBox x:Name="tbxTitre"/>
-            <TextBox x:Name="tbxStatut"/>
-            <TextBox x:Name="tbxIdClient"/>
-            <TextBox x:Name="tbxNomClient"/>
-            <DatePicker x:Name="tbxDateDebut"/>
-            <TextBox x:Name="tbxDescription"/>
-            <TextBox x:Name="tbxBudget"/>
-            <TextBox x:Name="tbxNbrEmployes"/>
-            <TextBox x:Name="tbxTotalSalaire"/>
+        <StackPanel x:Name="display" Orientation="Vertical" Spacing="10" Padding="10" Width="350" Background="LightSkyBlue">
+            <TextBlock FontSize="25" FontWeight="ExtraBlack">Modification du Projet:</TextBlock>
+            <TextBox x:Name="tbxTitre" Header="Titre de projet"/>
+            <TextBlock x:Name="tblTitreErreur" Foreground="Red" FontSize="14"/>
+            <ComboBox x:Name="cmbxStatut" PlaceholderText="Choisir un statut" Header="Statut">
+                <x:String>En cours</x:String>
+                <x:String>Terminé</x:String>
+            </ComboBox>
+            <TextBlock x:Name="tblStatutErreur" Foreground="Red" FontSize="14"/>
+            <TextBox x:Name="tbxIdClient" Header="idClient"/>
+            <TextBlock x:Name="tblIdClientErreur" Foreground="Red" FontSize="14"/>
+            <TextBox x:Name="tbxNomClient" Header="Nom du client"/>
+            <TextBlock x:Name="tblNomClientErreur" Foreground="Red" FontSize="14"/>
+            <DatePicker x:Name="dprDateDebut" Header="Date de début"/>
+            <TextBlock x:Name="tblDateDebutErreur" Foreground="Red" FontSize="14"/>
+            <TextBox x:Name="tbxDescription" Header="Description"/>
+            <TextBlock x:Name="tblDescriptionErreur" Foreground="Red" FontSize="14"/>
+            <TextBox x:Name="tbxBudget" Header="Budget"/>
+            <TextBlock x:Name="tblBudgetErreur" Foreground="Red" FontSize="14"/>
+            <TextBox x:Name="tbxNbrEmployes" Header="nombre d'employés"/>
+            <TextBlock x:Name="tblNbrEmployesErreur" Foreground="Red" FontSize="14"/>
+            <TextBox x:Name="tbxTotalSalaire" Header="Total salaire"/>
+            <TextBlock x:Name="tblTotalSalaireErreur" Foreground="Red" FontSize="14"/>
 
             <Button x:Name="btnModifier" Content="Modifier" Click="btnModifier_Click"/>
         </StackPanel>

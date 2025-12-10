@@ -184,8 +184,5 @@ namespace projet.Singletons
         {
             return !EmployeOccupe(matricule);
         }
-
-
-
     }
 }

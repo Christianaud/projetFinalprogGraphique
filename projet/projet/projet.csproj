@@ -26,7 +26,6 @@
     <None Remove="pages\PageListeClients.xaml" />
     <None Remove="pages\PageListeProjet.xaml" />
     <None Remove="pages\PageModifierClient.xaml" />
-    <None Remove="pages\PageModifierProjet.xaml" />
     <None Remove="pages\PageModifierProjets.xaml" />
   </ItemGroup>
 
@@ -93,11 +92,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="pages\PageModifierProjet.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
     <Page Update="pages\PageModifierClient.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -148,5 +142,6 @@
     <PublishReadyToRun Condition="'$(Configuration)' != 'Debug'">True</PublishReadyToRun>
     <PublishTrimmed Condition="'$(Configuration)' == 'Debug'">False</PublishTrimmed>
     <PublishTrimmed Condition="'$(Configuration)' != 'Debug'">True</PublishTrimmed>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 </Project>

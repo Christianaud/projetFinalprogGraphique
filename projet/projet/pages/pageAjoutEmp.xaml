@@ -9,7 +9,7 @@
     mc:Ignorable="d">
 
         <ScrollViewer>
-            <Grid Padding="30" RowSpacing="8" ColumnSpacing="20">
+        <Grid Padding="30" RowSpacing="8" ColumnSpacing="20"  Background="LightSkyBlue">
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>

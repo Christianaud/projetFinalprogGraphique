@@ -10,12 +10,15 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="70"/>
-            <RowDefinition Height="50*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Vertical" Grid.Row="0">
+        <StackPanel Grid.Row="0">
             <TextBlock FontSize="50" FontWeight="ExtraBlack">Listes des clients</TextBlock>
+            <CommandBar Background="Transparent"  IsOpen="False" DefaultLabelPosition="Right">
+                <AppBarButton x:Name="appBarAjoutClient" Icon="Add" Label="Ajouter" Click="appBarAjoutClient_Click" Tag="ajoutEmp" Background="Gold"/>
+            </CommandBar>
         </StackPanel>
 
         <GridView x:Name="listeClient" Grid.Row="1" SelectionChanged="listeClient_SelectionChanged" Padding="10" Background="Transparent">
@@ -23,8 +26,6 @@
                 <DataTemplate x:DataType="local1:Client">
                     <StackPanel Orientation="Vertical" Width="250" Background="Blue" CornerRadius="5" Margin="5" Padding="5" Spacing="5">
                         <TextBlock Text="{x:Bind Nom}" FontWeight="ExtraBlack" FontSize="26" Foreground="White"/>
-                        <TextBlock Text="{x:Bind Num_tel}" FontWeight="ExtraBlack" FontSize="20" Foreground="White"/>
-                        <TextBlock Text="{x:Bind Adresse}" FontSize="18" Foreground="White"/>
                         <TextBlock Text="{x:Bind Email}" FontSize="18" Foreground="White"/>
                     </StackPanel>
                 </DataTemplate>

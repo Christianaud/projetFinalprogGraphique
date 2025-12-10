@@ -9,19 +9,21 @@
     mc:Ignorable="d">
 
     <Grid>
-        <StackPanel x:Name="display" Orientation="Vertical" Spacing="20" Padding="20">
-            <TextBlock FontSize="40" FontWeight="ExtraBlack">Addition du Client:</TextBlock>
-            <TextBox x:Name="tbxId"/>
-            <TextBlock x:Name="tblIdErreur"/>
-            <TextBox x:Name="tbxNom"/>
-            <TextBlock x:Name="tblNomErreur"/>
-            <TextBox x:Name="tbxAdresse"/>
-            <TextBlock x:Name="tblAdresseErreur"/>
-            <TextBox x:Name="tbxNumTel"/>
-            <TextBlock x:Name="tblNumTelErreur"/>
-            <TextBox x:Name="tbxEmail"/>
-            <TextBlock x:Name="tblEmailErreur"/>
-            <Button x:Name="btnAjouter" Content="Modifier" Click="btnAjouter_Click"/>
+        <StackPanel x:Name="display" Orientation="Vertical" Spacing="5" Padding="5" Width="350" Background="LightSkyBlue" >
+            <TextBlock FontSize="25" FontWeight="ExtraBlack">Addition du Client:</TextBlock>
+            <TextBox x:Name="tbxNom" Header="Nom du client"/>
+            <TextBlock x:Name="tblNomErreur" Foreground="red" FontSize="15"/>
+            <TextBox x:Name="tbxAdresse" Header="Adresse du client"/>
+            <TextBlock x:Name="tblAdresseErreur" Foreground="red" FontSize="15"/>
+            <TextBox x:Name="tbxNumTel" Header="Numéro de teléphone"/>
+            <TextBlock x:Name="tblNumTelErreur" Foreground="red" FontSize="15"/>
+            <TextBox x:Name="tbxEmail" Header="Adresse courriel"/>
+            <TextBlock x:Name="tblEmailErreur" Foreground="red" FontSize="15"/>
+            <Button x:Name="btnAjouter" Content="Ajouter un client" Click="btnAjouter_Click" Height="45"
+                    Background="#0078D4"
+                    Foreground="White"  
+                    FontWeight="Bold"
+                    HorizontalAlignment="Center"/>
         </StackPanel>
     </Grid>
 </Page>

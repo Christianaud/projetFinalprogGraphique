@@ -34,11 +34,11 @@ namespace projet.pages
             client = e.Parameter as Client;
             if (client != null)
             {
-                tbxNom.Text = "Nom:\n " + client.Nom;
+                tbxNom.Text =  client.Nom;
                 tbxId.Text = "Id:\n " + client.Id;
-                tbxAdresse.Text = "Adresse:\n " + client.Adresse;
-                tbxNumTel.Text = "Telephone:\n " + client.Num_tel;
-                tbxEmail.Text = "Email:\n " + client.Email.ToString();
+                tbxAdresse.Text = client.Adresse;
+                tbxNumTel.Text = client.Num_tel;
+                tbxEmail.Text =  client.Email.ToString();
 
             }
         }

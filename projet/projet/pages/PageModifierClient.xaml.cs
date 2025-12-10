@@ -119,10 +119,10 @@ namespace projet.pages
             client = e.Parameter as Client;
             if (client != null)
             {
-                tbxNom.Text = "Nom: " + client.Nom;
-                tbxAdresse.Text = "Adresse: " + client.Adresse;
-                tbxNumTel.Text = "Telephone: " + client.Num_tel;
-                tbxEmail.Text = "Email: " + client.Email.ToString();
+                tbxNom.Text = client.Nom;
+                tbxAdresse.Text = client.Adresse;
+                tbxNumTel.Text =  client.Num_tel;
+                tbxEmail.Text = client.Email.ToString();
             }
         }
     }

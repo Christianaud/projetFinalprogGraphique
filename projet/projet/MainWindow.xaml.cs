@@ -78,6 +78,13 @@ namespace projet
                         };
 
                         ContentDialogResult result = await dialog.ShowAsync();
+
+                        if (result == ContentDialogResult.Primary)
+                        {
+                            // Ici tu mets la logique de déconnexion
+                            // Par exemple, retourner à la page de connexion
+                            //Frame.Navigate(typeof(PageConnexion));
+                        }
                         break;
                     default:
                         break;

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace projet.classes
 {
-    internal class Assignation
+    public class Assignation
     {
         int id;
         string projetNumero;

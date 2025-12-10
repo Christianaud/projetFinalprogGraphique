@@ -1,4 +1,4 @@
-using Microsoft.UI.Xaml;
+﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
@@ -6,8 +6,10 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using projet.classes;
+using projet.Singletons;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -28,6 +30,7 @@ namespace projet.pages
         public PageDetailsProjets()
         {
             InitializeComponent();
+            SingletonAssignation.getInstance().getAllAssignations();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -35,15 +38,25 @@ namespace projet.pages
             projet = e.Parameter as Projet;
             if (projet != null)
             {
-                tbxNumero.Text = "Numero:\n " + projet.Numero;
-                tbxTitre.Text = "Titre:\n " + projet.Titre;
-                tbxStatut.Text = "Statut:\n " + projet.Statut;
-                tbxDescription.Text = "Description:\n " + projet.Description;
-                tbxDateDebut.Text = "Date de debut:\n " + projet.DateDebut.ToString();
-                tbxIdClient.Text = "Id Client:\n " + projet.IdClient.ToString();
-                tbxBudget.Text = "Budget:\n " + projet.Budget.ToString();
-                tbxNomClient.Text = "Nom Client:\n " + projet.NomClient;
-                tbxNbrEmployes.Text = "Employe:\n " + projet.NbrEmployes.ToString();
+               
+                tbxNumero.Text = projet.Numero;
+                tbxTitre.Text = projet.Titre;
+                tbxStatut.Text =  projet.Statut;
+                tbxDescription.Text = projet.Description;
+                tbxDateDebut.Text = projet.DateDebut.ToString();
+                tbxBudget.Text = projet.Budget.ToString()+ " $";
+                tbxNomClient.Text =  projet.NomClient;
+                tbxNbrEmployes.Text = projet.NbrEmployes.ToString()+ " employés";
+                var toutesAssignations = SingletonAssignation.getInstance().Liste;
+                Debug.WriteLine($"Nombre total assignations : {toutesAssignations.Count}");
+                List<Assignation>assignerAuProjet = new List<Assignation>();
+                foreach(var assignation in toutesAssignations) {
+                    if(assignation.ProjetNumero == projet.Numero) {
+                        assignerAuProjet.Add(assignation);
+                    }
+                }
+                lvEmployesAssigne.ItemsSource = assignerAuProjet;
+                tbxTotalSalaire.Text = projet.TotalSalaire.ToString()+ " $";
             }
         }
 

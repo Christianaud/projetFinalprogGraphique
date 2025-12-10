@@ -12,6 +12,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
@@ -30,37 +31,14 @@ namespace projet.pages
             InitializeComponent();
         }
 
-        private void btnAjouter_Click(object sender, RoutedEventArgs e)
+        private async void btnAjouter_Click(object sender, RoutedEventArgs e)
         {
             bool flagValide = true;
 
-            tblIdErreur.Text = string.Empty;
             tblNomErreur.Text = string.Empty;
             tblAdresseErreur.Text = string.Empty;
             tblNumTelErreur.Text = string.Empty;
             tblEmailErreur.Text = string.Empty;
-
-            if (string.IsNullOrWhiteSpace(tbxId.Text))
-            {
-                flagValide = false;
-                tblIdErreur.Text = "L'identifiant ne doit pas être vide !!!";
-            }
-            else
-            {
-                int id;
-                bool valideId = int.TryParse(tbxId.Text, out id);
-
-                if (!valideId)
-                {
-                    flagValide = false;
-                    tblIdErreur.Text = "L'identifiant doit être un nombre !!!";
-                }
-                else if (id < 100 || id > 999)
-                {
-                    flagValide = false;
-                    tblIdErreur.Text = "L'identifiant doit être entre 100 et 999 !!!";
-                }
-            }
 
             if (string.IsNullOrWhiteSpace(tbxNom.Text))
             {
@@ -121,8 +99,18 @@ namespace projet.pages
             if(flagValide == true)
             {
                 SingletonListe.getInstance().ajouterClient(tbxNom.Text, tbxAdresse.Text, tbxNumTel.Text, tbxEmail.Text);
-            }
+                ContentDialog dialog = new ContentDialog
+                {
+                    XamlRoot = this.XamlRoot,
+                    Title = "Ajout d'un employé",
+                    Content = $"L'employé {tbxNom.Text} a été ajouté avec succès.",
+                    CloseButtonText = "OK"
+                };
+                await dialog.ShowAsync();
+                await Task.Delay(100);
 
+                Frame.Navigate(typeof(PageListeClients));
+            }
         }
     }
 }

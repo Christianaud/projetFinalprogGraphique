@@ -41,5 +41,10 @@ namespace projet.pages
                 Frame.Navigate(typeof(PageDetailsClients), newC);
             }
         }
+
+        private void appBarAjoutClient_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(PageAjouterClient));
+        }
     }
 }
