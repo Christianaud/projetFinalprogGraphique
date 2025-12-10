@@ -91,6 +91,7 @@ namespace projet.Singletons
                 using MySqlDataReader r = commande.ExecuteReader();
                 while (r.Read())
                 {
+                    int id = r.GetInt32("id");
                     string numero = r.GetString("numero");
                     string titre = r.GetString("titre");
                     DateTime dateDebut = r.GetDateTime("dateDebut");
@@ -100,8 +101,8 @@ namespace projet.Singletons
                     int totalSalaire = r.GetInt32("totalSalaireAPayer");
                     int idClient = r.GetInt32("idClient");
                     string statut = r.GetString("statut");
-                    string nomClient = r.GetString("nom");
-                    Projet projet = new Projet(numero, titre, dateDebut, description, budget, nbrEmployes, totalSalaire, idClient, nomClient, statut);
+                    string nomClient = r.GetString("nomClient");
+                    Projet projet = new Projet(id, numero, titre, dateDebut, description, budget, nbrEmployes, totalSalaire, idClient, nomClient, statut);
                     listeProjets.Add(projet);
                 }
             }
@@ -161,34 +162,64 @@ namespace projet.Singletons
             }
         }
 
-        public void ajouterProjer(string titre, DateTime dateDebut, string description, double budget, int nbrEmployes, double totalSalaire, int idClient, string statut)
+        public int ajouterProjer(string titre, DateTime dateDebut, string description, double budget,int nbrEmployes, double totalSalaire, int idClient, string statut,out string numeroCree)
         {
+            int dernierId = 0;
+            numeroCree = null;
             try
             {
                 using MySqlConnection con = new MySqlConnection(connectionString);
-                using MySqlCommand commande = new MySqlCommand();
-                commande.Connection = con;
-                commande.CommandText = "insert into projet values(null, @titre, @dateDebut, @description, @budget, @nombreEmploye, @totalSalaireAPayer, @statut, @idClient);";
-                commande.Parameters.AddWithValue("@titre", titre); 
-                commande.Parameters.AddWithValue("@dateDebut", dateDebut);
-                commande.Parameters.AddWithValue("@description", description);
-                commande.Parameters.AddWithValue("@budget", budget);
-                commande.Parameters.AddWithValue("@nombreEmploye", nbrEmployes);
-                commande.Parameters.AddWithValue("@totalSalaireAPayer", totalSalaire);
-                commande.Parameters.AddWithValue("@idClient", idClient);
-                commande.Parameters.AddWithValue("@statut", statut);
                 con.Open();
-                int i = commande.ExecuteNonQuery();
-                using MySqlCommand commande2 = new MySqlCommand();
-                commande2.Connection = con;
-                commande2.CommandText = "select LAST_INSERT_ID() ";
-                var res = commande2.ExecuteScalar();
-                getAllProjets(); //permet de recharger la liste des projets après un ajout
+
+                using MySqlTransaction transaction = con.BeginTransaction();
+
+                try
+                {
+                    using MySqlCommand cmd = new MySqlCommand();
+                    cmd.Connection = con;
+                    cmd.Transaction = transaction;
+
+                    cmd.CommandText = @"
+                INSERT INTO projet (titre, dateDebut, description, budget, nombreEmploye, totalSalaireAPayer, statut, idClient)
+                VALUES (@titre, @dateDebut, @description, @budget, @nombreEmploye, @totalSalaireAPayer, @statut, @idClient);
+                SELECT LAST_INSERT_ID();";
+
+                    cmd.Parameters.AddWithValue("@titre", titre);
+                    cmd.Parameters.AddWithValue("@dateDebut", dateDebut);
+                    cmd.Parameters.AddWithValue("@description", description);
+                    cmd.Parameters.AddWithValue("@budget", budget);
+                    cmd.Parameters.AddWithValue("@nombreEmploye", nbrEmployes);
+                    cmd.Parameters.AddWithValue("@totalSalaireAPayer", totalSalaire);
+                    cmd.Parameters.AddWithValue("@idClient", idClient);
+                    cmd.Parameters.AddWithValue("@statut", statut);
+
+                    // Récupérer 
+                    dernierId = Convert.ToInt32(cmd.ExecuteScalar());
+
+                    // Maintenant récupérer le numéro généré par le trigger
+                    using MySqlCommand cmd2 = new MySqlCommand(
+                        "SELECT numero FROM projet WHERE id = @id", con);
+                    cmd2.Transaction = transaction; // plusireurs instructions SQL en meme temps
+                    cmd2.Parameters.AddWithValue("@id", dernierId);
+                    numeroCree = cmd2.ExecuteScalar()?.ToString();
+
+                    transaction.Commit();
+
+                    getAllProjets();
+                }
+                catch
+                {
+                    transaction.Rollback();
+                    throw;
+                }
             }
             catch (MySqlException ex)
             {
                 Debug.WriteLine(ex.Message);
+                dernierId = 0;
             }
+
+            return dernierId;
         }
 
         public void modifierProjet(string numero, string titre, DateTime dateDebut, string description, int budget, int nbrEmployes, int totalSalaire, int idClient, string statut)
@@ -211,7 +242,7 @@ namespace projet.Singletons
                 con.Open();
                 commande.ExecuteNonQuery();
 
-                getAllClients();
+                getAllProjets();
             }
             catch (MySqlException ex)
             {

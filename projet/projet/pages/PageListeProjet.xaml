@@ -31,7 +31,7 @@
                         <TextBlock Text="{x:Bind Numero}" FontWeight="ExtraBlack" FontSize="7"/>
                         <TextBlock Text="{x:Bind Titre}" FontWeight="ExtraBlack" FontSize="25"/>
                         <TextBlock Text="{x:Bind NomClient}" FontSize="15"/>
-                        <TextBlock Text="{x:Bind Budget}" FontWeight="ExtraBlack" FontSize="10"/>
+                        <TextBlock Text="{x:Bind Statut}" Foreground="Red" FontSize="20" />
                     </StackPanel>
                 </DataTemplate>
             </GridView.ItemTemplate>

@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using MySqlX.XDevAPI.Relational;
 using projet.classes;
 using projet.dialogue;
 using projet.Singletons;
@@ -33,17 +34,51 @@ namespace projet.pages
     {
         ObservableCollection<Employe> employesAssignes = new ObservableCollection<Employe>();
         double totalSalaire = 0; 
-        string numProjet; 
-
+        Client clientSelectionne = null;
 
         public PageAjouterProjet()
         {
             InitializeComponent();
+            SingletonListe.getInstance().getAllClients();
             SingletonEmploye.getInstance().GetEmployesDisponibles();
 
             cmbxEmp.ItemsSource = SingletonEmploye.getInstance().Liste;
 
+            ChargerClients();
+
             lvAssignations.ItemsSource = employesAssignes;
+        }
+
+        private void ChargerClients()
+        {
+            // Récupérer la liste des clients depuis votre singleton ou base de données
+            // Exemple avec un singleton Client
+            var listeClients = SingletonListe.getInstance().ListeClients;
+
+            if (listeClients != null && listeClients.Any())
+            {
+                cmbxClients.ItemsSource = listeClients;
+                cmbxClients.DisplayMemberPath = "Nom"; 
+            }
+        }
+
+        private void cmbxClients_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            clientSelectionne = cmbxClients.SelectedItem as Client;
+
+            if (clientSelectionne != null && clientSelectionne.Id > 0)
+            {
+                // Afficher les informations du client
+                panelClientInfo.Visibility = Visibility.Visible;
+                tbxClientId.Text = $"ID: {clientSelectionne.Id}";
+                tbxClientNom.Text = $"Nom: {clientSelectionne.Nom}";
+
+                cmbxClientsErreur.Text = "";
+            }
+            else
+            {
+                panelClientInfo.Visibility = Visibility.Collapsed;
+            }
         }
 
         private async void cmbxEmp_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -99,9 +134,6 @@ namespace projet.pages
             bool estValide = true;
 
             tbxTitreErreur.Text = "";
-            tbxStatutErreur.Text = "";
-            tbxIdClientErreur.Text = "";
-            tbxNomClientErreur.Text = "";
             dpDateDebutErreur.Text = "";
             tbxDescriptionErreur.Text = "";
             tbxBudgetErreur.Text = "";
@@ -122,24 +154,9 @@ namespace projet.pages
                 estValide = false;
             }
 
-            // Statut
-            if (string.IsNullOrWhiteSpace(tbxStatut.Text))
+            if (clientSelectionne == null || clientSelectionne.Id == 0)
             {
-                tbxStatutErreur.Text = "Le statut est obligatoire.";
-                estValide = false;
-            }
-
-            // ID client
-            if (!int.TryParse(tbxIdClient.Text, out int idClient))
-            {
-                tbxIdClientErreur.Text = "L'ID client doit être un nombre.";
-                estValide = false;
-            }
-
-            // Nom client
-            if (string.IsNullOrWhiteSpace(tbxNomClient.Text))
-            {
-                tbxNomClientErreur.Text = "Nom obligatoire.";
+                cmbxClientsErreur.Text = "Veuillez sélectionner un client valide.";
                 estValide = false;
             }
 
@@ -174,51 +191,55 @@ namespace projet.pages
             if (!estValide)
                 return;
 
-            // AJOUT DU PROJET
 
-            SingletonListe.getInstance().ajouterProjer(
+            string numeroCree;
+            // AJOUT DU PROJET
+            var resultatAjout = SingletonListe.getInstance().ajouterProjer(
                 tbxTitre.Text,
                 dpDateDebut.Date.DateTime,
                 tbxDescription.Text,
                 budget,
-                employesAssignes.Count,   // ?? FIX
+                employesAssignes.Count,
                 double.Parse(tbxTotalSalaire.Text),
-                idClient,
-                tbxStatut.Text
+                clientSelectionne.Id,
+                "En cours",
+                out numeroCree  // paramètre out
             );
 
-            Projet projetCree = SingletonListe.getInstance().DernierProjet();
-            string numProjet = projetCree.Numero;
+            bool assignationReussie = true;
 
-            // assignation
             foreach (var emp in employesAssignes)
             {
                 if (SingletonAssignation.getInstance().EmployeOccupe(emp.Matricule))
                 {
                     cmbxEmpErreur.Text = $"L'employé {emp.Nom} est déjà sur un projet.";
+                    assignationReussie = false;
                     continue;
                 }
+
                 int heures = emp.HeuresProjet;
                 double salaire = emp.TauxHoraire * heures;
 
+                //assignation
                 SingletonAssignation.getInstance().ajouterAssignation(
-                    numProjet,
+                    numeroCree,            
                     emp.Matricule,
                     heures,
                     salaire
                 );
-
-                ContentDialog dialog = new ContentDialog
-                {
-                    XamlRoot = this.XamlRoot,
-                    Title = "Projet ajouté",
-                    Content = $"Le projet {tbxTitre.Text} a été créé avec succès.",
-                    CloseButtonText = "OK"
-                };
-                await dialog.ShowAsync();
-                Frame.Navigate(typeof(PageListeProjet));
             }
-        }
 
+            ContentDialog dialog = new ContentDialog
+            {
+                XamlRoot = this.XamlRoot,
+                Title = "Projet ajouté",
+                Content = $"Le projet {tbxTitre.Text} a été créé avec succès.\n" ,
+                CloseButtonText = "OK"
+            };
+            await dialog.ShowAsync();
+
+            await Task.Delay(100);
+            Frame.Navigate(typeof(PageListeProjet));
+        }
     }
 }

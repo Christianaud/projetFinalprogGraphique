@@ -17,14 +17,12 @@
             <TextBox x:Name="tbxTitre" Header="Titre"/>
             <TextBlock x:Name="tbxTitreErreur" Foreground="Red" FontSize="12"/>
 
-            <TextBox x:Name="tbxStatut" Header="Statut"/>
-            <TextBlock x:Name="tbxStatutErreur" Foreground="Red" FontSize="12"/>
-
-            <TextBox x:Name="tbxIdClient" Header="idClient"/>
-            <TextBlock x:Name="tbxIdClientErreur" Foreground="Red" FontSize="12"/>
-
-            <TextBox x:Name="tbxNomClient" Header="nomClient"/>
-            <TextBlock x:Name="tbxNomClientErreur" Foreground="Red" FontSize="12"/>
+            <ComboBox x:Name="cmbxClients"
+                Header="Client"
+                DisplayMemberPath="Nom"
+                Width="200"
+                SelectionChanged="cmbxClients_SelectionChanged"/>
+            <TextBlock x:Name="cmbxClientsErreur" Foreground="Red" FontSize="12"/>
 
             <DatePicker x:Name="dpDateDebut" Header="date de début"/>
             <TextBlock x:Name="dpDateDebutErreur" Foreground="Red" FontSize="12"/>
@@ -35,19 +33,23 @@
             <TextBox x:Name="tbxBudget" Header="budget"/>
             <TextBlock x:Name="tbxBudgetErreur" Foreground="Red" FontSize="12"/>
 
-            <TextBox x:Name="tbxNbrEmployes" Header="nombre d'employe" IsReadOnly="True"/>
+            <!-- Affichage des informations du client sélectionné -->
+            <StackPanel x:Name="panelClientInfo" Visibility="Collapsed">
+                <TextBlock x:Name="tbxClientId" FontSize="12" FontStyle="Italic"/>
+                <TextBlock x:Name="tbxClientNom" FontSize="12" FontStyle="Italic"/>
+            </StackPanel>
+            
+            <TextBox x:Name="tbxNbrEmployes" Header="nombre d'employe" IsReadOnly="True" PlaceholderText="Se fait de facon automatique"/>
             <TextBlock x:Name="tbxNbrEmployesErreur" Foreground="Red" FontSize="12"/>
 
-            <TextBox x:Name="tbxTotalSalaire" Header="salaire des employés" IsReadOnly="True"/>
+            <TextBox x:Name="tbxTotalSalaire" Header="salaire des employés" IsReadOnly="True" PlaceholderText="Se fait de facon automatique"/>
             <TextBlock x:Name="tbxTotalSalaireErreur" Foreground="Red" FontSize="12"/>
 
             <ComboBox x:Name="cmbxEmp"
                 DisplayMemberPath="NomComplet"
                 Width="200" 
                 SelectionChanged="cmbxEmp_SelectionChanged"/>
-            
             <TextBlock x:Name="cmbxEmpErreur" Foreground="Red"/>
-
 
             <ListView x:Name="lvAssignations"
                 ItemsSource="{Binding employesAssignes}"
@@ -64,6 +66,7 @@
                             <TextBlock Text="{x:Bind Nom}" FontWeight="Bold" FontSize="18" />
                             <TextBlock Text="{x:Bind Prenom}" FontWeight="Bold" FontSize="18" />
                             <TextBlock Text="{x:Bind Matricule}" FontSize="16" />
+                            <TextBlock Text="{x:Bind HeuresProjet}" FontSize="14"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>

@@ -8,6 +8,7 @@ namespace projet.classes
 {
     internal class Projet
     {
+        int id;
         string numero;
         string titre;
         DateTime dateDebut;
@@ -19,8 +20,9 @@ namespace projet.classes
         string nomClient;
         string statut;
 
-        public Projet(string numero, string titre, DateTime dateDebut, string description, int budget, int nbrEmployes, int totalSalaire, int idClient, string nomClient, string statut)
+        public Projet(int id, string numero, string titre, DateTime dateDebut, string description, int budget, int nbrEmployes, int totalSalaire, int idClient, string nomClient, string statut)
         {
+            this.id = id;
             this.numero = numero;
             this.titre = titre;
             this.dateDebut = dateDebut;
@@ -33,6 +35,7 @@ namespace projet.classes
             this.statut = statut;
         }
 
+        public int Id { get { return id; } }
         public string Numero { get => numero; set => numero = value; }
         public string Titre { get => titre; set => titre = value; }
         public DateTime DateDebut { get => dateDebut; set => dateDebut = value; }
